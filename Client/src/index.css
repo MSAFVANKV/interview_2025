@@ -4,3 +4,8 @@ body{
   box-sizing: border-box;
   background-color: #f0f0f0;
 }
+
+.px-1{
+  padding-left: 0.25rem; /* 4px */
+  padding-right: 0.25rem; /* 4px */
+}

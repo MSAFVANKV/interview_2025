@@ -16,6 +16,7 @@ const Container = styled("div")`
 
 const Item = styled(Paper)(({ theme }) => ({
   backgroundColor: "#fff",
+//   borderRadius:"100%",
   cursor:"pointer",
   ...theme.typography.body2,
   padding: theme.spacing(1),
@@ -41,6 +42,7 @@ function CategoyBar() {
     { image: "https://placehold.co/400x300", name: "Category 4" },
     { image: "https://placehold.co/400x300", name: "Category 5" },
     { image: "https://placehold.co/400x300", name: "Category 6" },
+    
   ];
 
   return (

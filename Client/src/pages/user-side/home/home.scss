@@ -1,0 +1,42 @@
+.slider-container {
+    width: 100%;
+    position: relative;
+    height: 400px; /* Set the height of the container */
+  }
+  
+  .slider-image {
+    width: 100%;  /* Make the image take up full width */
+    height: 400px; /* Fixed height */
+    object-fit: cover; /* Ensure the image covers the entire area without distortion */
+  }
+  
+  .custom-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 2rem;
+    color: #000;
+    cursor: pointer;
+    z-index: 10;
+    height: 40px;
+    width: 40px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    
+    &:hover {
+      background: rgba(255, 255, 255, 1);
+    }
+  }
+  
+  .custom-next {
+    right: 10px;
+  }
+  
+  .custom-prev {
+    left: 10px;
+  }
+  

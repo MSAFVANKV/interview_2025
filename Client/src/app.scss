@@ -6,6 +6,30 @@
     background-color: #fff;
 }
 
+// colors
+@each $name, $color in $colors {
+  .bg-#{$name} {
+    background-color: $color;
+  }
+}
+
+// Horizontal Padding Utilities (px-1 to px-10)
+@for $i from 1 through 10 {
+  .px-#{$i} {
+    padding-left: $i * 0.25rem; /* 4px, 8px, 12px, etc. */
+    padding-right: $i * 0.25rem;
+  }
+}
+
+// Vertical Padding Utilities (py-1 to py-10)
+@for $i from 1 through 10 {
+  .py-#{$i} {
+    padding-top: $i * 0.25rem; /* 4px, 8px, 12px, etc. */
+    padding-bottom: $i * 0.25rem;
+  }
+}
+
+
 .error-page {
     display: flex;
     justify-content: center;
