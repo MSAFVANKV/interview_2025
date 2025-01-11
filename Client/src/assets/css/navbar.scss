@@ -1,0 +1,56 @@
+.navbar {
+    background-color: #333;
+    color: #fff;
+  
+    &__toolbar {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border: none;
+    }
+  
+    &__logo img {
+      height: 50px;
+    }
+  
+    &__links {
+      display: flex;
+      gap: 20px;
+  
+      a {
+        text-decoration: none;
+        color: #fff;
+        font-weight: bold;
+        transition: color 0.3s;
+  
+        &:hover {
+          color: #ff9800;
+        }
+      }
+  
+      @media (max-width: 768px) {
+        display: none;
+      }
+    }
+  
+    &__hamburger {
+      display: none;
+  
+      @media (max-width: 768px) {
+        display: block;
+      }
+    }
+  
+    &__drawer {
+      width: 250px;
+  
+      .MuiListItemText-root {
+        text-align: center;
+      }
+    }
+  }
+  .px{
+    display: flex;
+    align-items: center;
+    gap: 5px;
+  }
