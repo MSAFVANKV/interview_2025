@@ -1,0 +1,24 @@
+.login-form {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    background-color: #f4f4f4;
+  }
+  
+  .login-title {
+    font-weight: bold;
+    margin-bottom: 20px;
+    color: #333;
+  }
+  
+  .MuiTextField-root {
+    margin-bottom: 15px;
+  }
+  
+  button {
+    margin-top: 20px;
+  }
+  

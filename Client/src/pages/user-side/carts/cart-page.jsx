@@ -13,6 +13,9 @@ const CartPage = () => {
   // Access the cart store
   const cartItems = useSelector((state) => state.cart.items);
 
+  console.log(cartItems);
+  
+
   const handleRemoveFromCart = (id) => {
     dispatch(removeFromCart(id));
   };
@@ -125,7 +128,10 @@ const CartPage = () => {
                   </Typography>
                   <Typography variant="body2">Quantity: {item.quantity}</Typography>
                   <Typography variant="body2" className="price">
-                    ₹{item.price}
+                    {item.size}
+                  </Typography>
+                  <Typography variant="body2" className="price">
+                    ₹{item.amount}
                   </Typography>
 
                   {/* Quantity Controls */}

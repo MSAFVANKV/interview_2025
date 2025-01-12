@@ -4,6 +4,7 @@ import RouteProtector from "../middlewares/route-protector";
 import HomePage from "../pages/user-side/home/home-page";
 import ErrorPage from "../Error-page";
 import CartPage from "../pages/user-side/carts/cart-page";
+import LoginPage from "../pages/user-side/auth/login/login-page";
 
 
 
@@ -24,6 +25,10 @@ const router = createBrowserRouter(
                 {
                     path: '/cart',  // Protected route
                     element: <CartPage />,
+                  },
+                  {
+                    path: '/login',  // Protected route
+                    element: <LoginPage />,
                   },
             ]
         },

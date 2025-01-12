@@ -1,10 +1,11 @@
 import React, { useState } from "react";
-import { IconButton } from "@mui/material";
+import { Badge, IconButton } from "@mui/material";
 import styled from "@emotion/styled"; // Use @emotion/styled for styling
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import MyInput from "../myUi/MyInput";
 import useNavigateClicks from "../../hooks/navigate-clicks";
+import { useSelector } from "react-redux";
 // Styled container using @emotion/styled
 const Container = styled("div")`
   display: flex;
@@ -18,6 +19,7 @@ const Container = styled("div")`
 function SearchInput() {
   const [value, setValue] = useState("");
   const {handleClick} = useNavigateClicks()
+  const cartItems = useSelector((state) => state.cart.items);
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -48,7 +50,13 @@ function SearchInput() {
           handleClick("/cart")
         }}
         >
-          <LocalMallIcon sx={{ color: "white" }} />
+            <Badge 
+            badgeContent={cartItems.length} // Display the number of items in the cart
+            color="secondary" // Badge color
+          >
+                <LocalMallIcon sx={{ color: "white" }} />
+          </Badge>
+     
         </IconButton>
         <IconButton
          onClick={()=>{

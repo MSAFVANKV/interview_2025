@@ -4,6 +4,7 @@ import MenuIcon from '@mui/icons-material/Menu';
 import '../../assets/css/navbar.scss';
 import SearchInput from '../search/Search_Input';
 import useNavigateClicks from '../../hooks/navigate-clicks';
+import { useSelector } from 'react-redux';
 
 const NavbarItems = [
     {
@@ -16,7 +17,9 @@ const NavbarItems = [
 
 function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
-  const {handleClick} = useNavigateClicks()
+  const {handleClick} = useNavigateClicks();
+  
+
 
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
