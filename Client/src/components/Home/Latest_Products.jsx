@@ -8,6 +8,8 @@ import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid2"; // Import Grid for layout
 import { Box, IconButton } from "@mui/material";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
+import { useDispatch } from "react-redux";
+import { addToCart } from "../../redux/userSide/action/cartSlice";
 
 const products = [
   {
@@ -57,6 +59,21 @@ const products = [
 ];
 
 export default function LatestsProducts() {
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (product) => {
+    console.log(product,'add cart');
+    
+    dispatch(
+      addToCart({
+        id: product.id,
+        name: product.title,
+        mrp:product.mrp,
+        amount: product.amount,
+        quantity: 1, // Default quantity
+      })
+    );
+  };
   return (
     <Box
       sx={{
@@ -127,6 +144,7 @@ export default function LatestsProducts() {
                     padding:"0.5rem",
                     borderRadius:"10px"
                 }}
+                onClick={() => handleAddToCart(product)}
                 >
                   <AddShoppingCartIcon />
                 </IconButton>

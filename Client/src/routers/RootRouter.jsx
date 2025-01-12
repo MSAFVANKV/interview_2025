@@ -3,6 +3,7 @@ import App from "../App";
 import RouteProtector from "../middlewares/route-protector";
 import HomePage from "../pages/user-side/home/home-page";
 import ErrorPage from "../Error-page";
+import CartPage from "../pages/user-side/carts/cart-page";
 
 
 
@@ -11,9 +12,9 @@ const router = createBrowserRouter(
         {
             path: "/",
             element:(
-               <RouteProtector>
+            //    <RouteProtector>
                 <App/>
-               </RouteProtector> 
+            //    </RouteProtector> 
             ),
             children:[
                 {
@@ -21,8 +22,8 @@ const router = createBrowserRouter(
                     element: <HomePage />,
                 },
                 {
-                    path: '/products',  // Protected route
-                    element: <div className="">products</div>,
+                    path: '/cart',  // Protected route
+                    element: <CartPage />,
                   },
             ]
         },

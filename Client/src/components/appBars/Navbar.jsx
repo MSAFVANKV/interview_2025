@@ -3,6 +3,7 @@ import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText } fro
 import MenuIcon from '@mui/icons-material/Menu';
 import '../../assets/css/navbar.scss';
 import SearchInput from '../search/Search_Input';
+import useNavigateClicks from '../../hooks/navigate-clicks';
 
 const NavbarItems = [
     {
@@ -15,6 +16,7 @@ const NavbarItems = [
 
 function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);
+  const {handleClick} = useNavigateClicks()
 
   const toggleDrawer = (open) => () => {
     setDrawerOpen(open);
@@ -29,7 +31,15 @@ function Navbar() {
       <Toolbar className="navbar__toolbar">
         {/* Logo */}
         <div className="navbar__logo">
-          <img src="/logo.png" alt="Logo" />
+          <img src="/img/logo.webp" alt="Logo"
+          onClick={()=>{
+            handleClick('/')
+          }}
+          style={{
+            cursor:"pointer",
+            borderRadius:"50%"
+          }}
+          />
         </div>
 
         {/* Links */}

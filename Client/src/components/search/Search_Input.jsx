@@ -4,6 +4,7 @@ import styled from "@emotion/styled"; // Use @emotion/styled for styling
 import LocalMallIcon from "@mui/icons-material/LocalMall";
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import MyInput from "../myUi/MyInput";
+import useNavigateClicks from "../../hooks/navigate-clicks";
 // Styled container using @emotion/styled
 const Container = styled("div")`
   display: flex;
@@ -16,6 +17,7 @@ const Container = styled("div")`
 
 function SearchInput() {
   const [value, setValue] = useState("");
+  const {handleClick} = useNavigateClicks()
 
   const handleChange = (event) => {
     setValue(event.target.value);
@@ -41,10 +43,18 @@ function SearchInput() {
       />
 
       <IconButton>
-        <IconButton>
+        <IconButton
+        onClick={()=>{
+          handleClick("/cart")
+        }}
+        >
           <LocalMallIcon sx={{ color: "white" }} />
         </IconButton>
-        <IconButton>
+        <IconButton
+         onClick={()=>{
+          handleClick("/wishlist")
+        }}
+        >
           <FavoriteIcon sx={{ color: "white" }} />
         </IconButton>
       </IconButton>
