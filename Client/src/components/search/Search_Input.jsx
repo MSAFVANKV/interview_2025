@@ -6,6 +6,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import MyInput from "../myUi/MyInput";
 import useNavigateClicks from "../../hooks/navigate-clicks";
 import { useSelector } from "react-redux";
+import AccountMenu from "../appBars/AccountMenu";
 // Styled container using @emotion/styled
 const Container = styled("div")`
   display: flex;
@@ -44,7 +45,7 @@ function SearchInput() {
         }}
       />
 
-      <IconButton>
+{/* 
         <IconButton
         onClick={()=>{
           handleClick("/cart")
@@ -64,8 +65,9 @@ function SearchInput() {
         }}
         >
           <FavoriteIcon sx={{ color: "white" }} />
-        </IconButton>
-      </IconButton>
+        </IconButton> */}
+        <AccountMenu/>
+    
     </Container>
   );
 }

@@ -13,9 +13,9 @@ const router = createBrowserRouter(
         {
             path: "/",
             element:(
-            //    <RouteProtector>
+               <RouteProtector>
                 <App/>
-            //    </RouteProtector> 
+               </RouteProtector> 
             ),
             children:[
                 {

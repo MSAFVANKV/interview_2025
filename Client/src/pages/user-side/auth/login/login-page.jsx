@@ -8,9 +8,13 @@ import Grid from "@mui/material/Grid2";
 
 import "./LoginPage.scss";
 import { setUserData } from "../../../../redux/userSide/action/authSlice";
+import { Login_Api } from "../../../../routers/api";
+import { useNavigate } from "react-router";
+import { makeToast } from "../../../../lib/helper";
 
 function LoginPage() {
   const dispatch = useDispatch();
+  const navigate = useNavigate();
 
   const validationSchema = Yup.object({
     email: Yup.string()
@@ -51,12 +55,32 @@ function LoginPage() {
         <Formik
           initialValues={{ email: "", password: "" }}
           validationSchema={validationSchema}
-          onSubmit={(values) => {
+          onSubmit={async (values) => {
             console.log(values);
+            try {
+              const response = await Login_Api({ email: values.email, password: values.password })
+              console.log(response, 'response');
+
+              if (response.status === 200 || response.status === 201) {
+                dispatch(setUserData(values)); // Dispatch login action
+                navigate('/')
+                makeToast(`${response.data.message}`)
+              }
+            } catch (error) {
+              makeToast(`server error`)
+
+            }
+            dispatch(setUserData(values)); // Dispatch login action
           }}
         >
           {({ values }) => (
-            <Form>
+            <Form
+              style={{
+                display: "flex",
+                flexDirection: "column",
+                gap: "1rem",
+              }}
+            >
               <Box
                 sx={{
                   display: "flex",
@@ -67,9 +91,38 @@ function LoginPage() {
                   name="email"
                   id="email"
                   value={values.email}
+                  type="email"
                   as={TextField}
+                  placeholder="enter email"
                 />
-                <ErrorMessage name="email" component={"span"} />
+                <ErrorMessage name="email" component={"span"}
+                  style={{
+                    color: "red",
+                  }}
+                />
+              </Box>
+
+              <Box
+                sx={{
+                  display: "flex",
+                  flexDirection: "column",
+                }}
+              >
+                <Field
+                  name="password"
+                  id="password"
+                  type="password"
+                  value={values.password}
+                  as={TextField}
+                  placeholder="enter password"
+                />
+                <ErrorMessage
+                  name="password"
+                  component={"span"}
+                  style={{
+                    color: "red",
+                  }}
+                />
               </Box>
 
               <Button
@@ -77,7 +130,7 @@ function LoginPage() {
                 sx={{
                   width: "100%",
                 }}
-              >    
+              >
                 Login
               </Button>
             </Form>

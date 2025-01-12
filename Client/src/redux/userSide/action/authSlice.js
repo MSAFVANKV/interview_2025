@@ -1,4 +1,7 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
+import { FETCH_USER_DATA } from "../../../routers/urlPth";
+import axios from 'axios';
+import { Fetch_User } from "../../../routers/api";
 
 // Initial state
 const initialState = {
@@ -10,25 +13,22 @@ const initialState = {
 };
 
 // Async thunk for login
-export const login = createAsyncThunk(
-  "auth/login",
-  async ({ username, password }, thunkAPI) => {
+export const fetchUserDetails = createAsyncThunk(
+  "user/fetchUserDetails",
+  async (_, { rejectWithValue }) => {
     try {
-      const response = await fetch("/api/auth/login", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ username, password }),
-      });
-
-      const data = await response.json();
-      if (!response.ok) {
-        return thunkAPI.rejectWithValue(data.message || "Failed to login");
+      const response = await Fetch_User();
+      console.log(response);
+      
+      if (response.data.success === true) {
+        return response.data.user;
+      } else {
+        return rejectWithValue("Failed to fetch admin details");
       }
-
-      return { user: data.user, token: data.token }; // Assuming data contains { user, token }
     } catch (error) {
-      console.error(error);
-      return thunkAPI.rejectWithValue("Failed to login");
+      return rejectWithValue(
+        error.response ? error.response.data : "Network error"
+      );
     }
   }
 );
@@ -37,7 +37,7 @@ const authSlice = createSlice({
   name: "auth",
   initialState,
   reducers: {
-    logout: (state) => {
+    logoutState: (state) => {
       state.user = null;
       state.token = null;
       state.isLogged = false;
@@ -49,17 +49,16 @@ const authSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(login.pending, (state) => {
+      .addCase(fetchUserDetails.pending, (state) => {
         state.isLoading = true;
         state.error = null;
       })
-      .addCase(login.fulfilled, (state, action) => {
+      .addCase(fetchUserDetails.fulfilled, (state, action) => {
         state.isLoading = false;
-        state.isLogged = true;
-        state.user = action.payload.user;
-        state.token = action.payload.token;
+        state.user = action.payload;
+      state.isLogged = true;
       })
-      .addCase(login.rejected, (state, action) => {
+      .addCase(fetchUserDetails.rejected, (state, action) => {
         state.isLoading = false;
         state.isLogged = false;
         state.error = action.payload || "Unknown error";
@@ -67,7 +66,7 @@ const authSlice = createSlice({
   },
 });
 
-export const { logout, setUserData } = authSlice.actions;
+export const { logoutState, setUserData } = authSlice.actions;
 
 export default authSlice.reducer;
 
