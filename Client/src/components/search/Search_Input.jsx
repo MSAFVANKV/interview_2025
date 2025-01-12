@@ -9,6 +9,9 @@ const Container = styled("div")`
   display: flex;
   align-items: center;
   gap: 5px;
+   @media screen and (max-width: 700px) {
+    display: none;
+  }
 `;
 
 function SearchInput() {
@@ -31,6 +34,9 @@ function SearchInput() {
           "& .MuiOutlinedInput-root": {
             borderColor: "green",
           },
+          display:{
+            md:"block"
+          }
         }}
       />
 

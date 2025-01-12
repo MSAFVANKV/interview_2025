@@ -1,78 +1,154 @@
-@import './assets/css/varables.scss';
+// @import './assets/css/varables.scss';
 
-.section-container{
-    max-width: 1400px;
-    margin: 0 auto;
-    background-color: #fff;
+// .section-container{
+//     max-width: 1400px;
+//     margin: 0 auto;
+//     background-color: #fff;
+// }
+
+// // colors
+// @each $name, $color in $colors {
+//   .bg-#{$name} {
+//     background-color: $color;
+//   }
+// }
+
+
+// // Horizontal Padding Utilities (px-1 to px-10)
+// @for $i from 1 through 10 {
+//   .px-#{$i} {
+//     padding-left: $i * 0.25rem; /* 4px, 8px, 12px, etc. */
+//     padding-right: $i * 0.25rem;
+//   }
+// }
+
+// // Vertical Padding Utilities (py-1 to py-10)
+// @for $i from 1 through 10 {
+//   .py-#{$i} {
+//     padding-top: $i * 0.25rem; /* 4px, 8px, 12px, etc. */
+//     padding-bottom: $i * 0.25rem;
+//   }
+// }
+
+
+// .error-page {
+//     display: flex;
+//     justify-content: center;
+//     align-items: center;
+//     height: 100vh;
+//     background-color: $background-color;
+//     font-family: $font-family;
+//     color: #333;
+  
+//     .error-content {
+//       text-align: center;
+//       padding: 20px;
+//       border: 2px solid $error-color;
+//       border-radius: 8px;
+//       background-color: #fff;
+//       box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      
+//       .error-code {
+//         font-size: 80px;
+//         font-weight: bold;
+//         color: $error-color;
+//       }
+  
+//       .error-message {
+//         font-size: 18px;
+//         margin-top: 10px;
+//         color: #555;
+//       }
+  
+//       .go-home-button {
+//         margin-top: 20px;
+//         padding: 10px 20px;
+//         background-color: $button-bg-color;
+//         color: #fff;
+//         border: none;
+//         border-radius: 4px;
+//         font-size: 16px;
+//         cursor: pointer;
+//         transition: background-color 0.3s ease;
+  
+//         &:hover {
+//           background-color: $button-hover-bg-color;
+//         }
+//       }
+//     }
+//   }
+@use './assets/css/varables.scss' as vars;
+
+.section-container {
+  max-width: 1400px;
+  margin: 0 auto;
+  background-color: #fff;
 }
 
-// colors
-@each $name, $color in $colors {
+// Colors
+@each $name, $color in vars.$colors {
   .bg-#{$name} {
     background-color: $color;
   }
 }
 
-// Horizontal Padding Utilities (px-1 to px-10)
+// Padding Utilities
 @for $i from 1 through 10 {
   .px-#{$i} {
-    padding-left: $i * 0.25rem; /* 4px, 8px, 12px, etc. */
-    padding-right: $i * 0.25rem;
+    padding-left: #{$i * 0.25rem}; // 4px, 8px, 12px, etc.
+    padding-right: #{$i * 0.25rem};
   }
-}
 
-// Vertical Padding Utilities (py-1 to py-10)
-@for $i from 1 through 10 {
   .py-#{$i} {
-    padding-top: $i * 0.25rem; /* 4px, 8px, 12px, etc. */
-    padding-bottom: $i * 0.25rem;
+    padding-top: #{$i * 0.25rem};
+    padding-bottom: #{$i * 0.25rem};
   }
 }
 
-
+// Error Page
 .error-page {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-    background-color: $background-color;
-    font-family: $font-family;
-    color: #333;
-  
-    .error-content {
-      text-align: center;
-      padding: 20px;
-      border: 2px solid $error-color;
-      border-radius: 8px;
-      background-color: #fff;
-      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-      
-      .error-code {
-        font-size: 80px;
-        font-weight: bold;
-        color: $error-color;
-      }
-  
-      .error-message {
-        font-size: 18px;
-        margin-top: 10px;
-        color: #555;
-      }
-  
-      .go-home-button {
-        margin-top: 20px;
-        padding: 10px 20px;
-        background-color: $button-bg-color;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        font-size: 16px;
-        cursor: pointer;
-        transition: background-color 0.3s ease;
-  
-        &:hover {
-          background-color: $button-hover-bg-color;
-        }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+  background-color: vars.$background-color;
+  font-family: vars.$font-family;
+  color: #333;
+
+  .error-content {
+    text-align: center;
+    padding: 20px;
+    border: 2px solid vars.$error-color;
+    border-radius: 8px;
+    background-color: #fff;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    .error-code {
+      font-size: 80px;
+      font-weight: bold;
+      color: vars.$error-color;
+    }
+
+    .error-message {
+      font-size: 18px;
+      margin-top: 10px;
+      color: #555;
+    }
+
+    .go-home-button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: vars.$button-bg-color;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: background-color 0.3s ease;
+
+      &:hover {
+        background-color: vars.$button-hover-bg-color;
       }
     }
   }
+}
