@@ -93,7 +93,7 @@ export default function NavbarDrawer() {
   }>({}); // Track collapse state
   const navigate = useNavigate();
   const location = useLocation(); // Get current location
-  const pathname = location.pathname.replace("/admin/", "");
+  const pathname = location.pathname.replace("/admin", "")
 
   //   alert(pathname)
 
@@ -137,7 +137,8 @@ export default function NavbarDrawer() {
   const handleNavigation = (segment: string | undefined) => {
     if (segment) {
       setCollapseStates({});
-      navigate(segment); // Navigate to the specified segment
+      // navigate(segment); // Navigate to the specified segment
+      navigate("/admin" + segment);
     }
   };
 
@@ -190,10 +191,13 @@ export default function NavbarDrawer() {
         {/* <Divider /> */}
         <List>
           {NAVIGATION.map((item, index) => {
-            // console.log(item.segment);
-            // console.log(pathname);
+            console.log(item.segment,'segment');
+            console.log(pathname,'pathname');
+
+
 
             if (item.isChild) {
+              
               return (
                 <React.Fragment key={index}>
                   <ListItemButton
@@ -232,6 +236,7 @@ export default function NavbarDrawer() {
                           sx={{ pl: 4 }}
                           onClick={() => handleNavigation(child.segment)}
                         >
+                          
                           {child.segment === pathname ? (
                             <label className="radio-button">
                               <input

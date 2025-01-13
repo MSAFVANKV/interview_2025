@@ -19,7 +19,7 @@ function NavigationList() {
       icon: <Icon icon="entypo:box" />,
       isChild: true,
       children: [
-        { title: "Add New Product", segment: "/products/add-new" },
+        { title: "Add New Product", segment: "/products/add" },
         { title: "All Products", segment: "/products/all" },
         { title: "Category", segment: "/products/category" },
         { title: "Brand", segment: "/products/brand" },

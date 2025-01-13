@@ -4,7 +4,7 @@ import * as Yup from "yup";
 
 
 export const ProductSchema = Yup.object().shape({
-    title: Yup.string().required("Title is required"),
+  productName: Yup.string().required("Title is required"),
     amount: Yup.number().required("Amount is required").min(1, "Invalid amount"),
     mrp: Yup.number().required("MRP is required").min(1, "Invalid MRP"),
     description: Yup.string().required("Description is required"),
@@ -19,7 +19,7 @@ export const ProductSchema = Yup.object().shape({
           sizeArray: Yup.array().of(
             Yup.object().shape({
               size: Yup.string().required("Size is required"),
-              finalAmount: Yup.number()
+              finalPrice: Yup.number()
                 .required("Final amount is required")
                 .min(1, "Invalid amount"),
               discount: Yup.number()

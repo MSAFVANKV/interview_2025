@@ -81,9 +81,9 @@
 //                                   onChange={handleChange}
 //                                 />
 //                                 <TextField
-//                                   name={`variations.${index}.sizeArray.${sizeIndex}.finalAmount`}
+//                                   name={`variations.${index}.sizeArray.${sizeIndex}.finalPrice`}
 //                                   label="Final Amount"
-//                                   value={size.finalAmount}
+//                                   value={size.finalPrice}
 //                                   onChange={handleChange}
 //                                 />
 //                                 <TextField
@@ -106,7 +106,7 @@
 //                               onClick={() =>
 //                                 pushSize({
 //                                   size: "",
-//                                   finalAmount: "",
+//                                   finalPrice: "",
 //                                   discount: "",
 //                                 })
 //                               }
@@ -132,7 +132,7 @@
 //                         variationName: "",
 //                         colorName: "",
 //                         sizeArray: [
-//                           { size: "", finalAmount: "", discount: "" },
+//                           { size: "", finalPrice: "", discount: "" },
 //                         ],
 //                       })
 //                     }
@@ -163,8 +163,65 @@ import { FieldArray } from "formik";
 import { Button, TextField, Box, Typography, IconButton } from "@mui/material";
 import AddCircleIcon from "@mui/icons-material/AddCircle";
 import RemoveCircleIcon from "@mui/icons-material/RemoveCircle";
+import { useEffect, useState } from "react";
 
 function VariationForm({ values, handleChange, errors, touched }) {
+  const [imagePreviews, setImagePreviews] = useState(
+    values.variations.map(() => []) // Initialize an empty preview array for each variation
+  );
+
+  useEffect(() => {
+    const newPreviews = values.variations.map(
+      (variation) => variation.photos.map((photo) => URL.createObjectURL(photo)) // Convert photos to object URLs
+    );
+    setImagePreviews(newPreviews);
+  }, [values.variations]);
+
+  const handleFileChange = (index, event) => {
+    const files = Array.from(event.target.files); // Get all selected files
+
+    if (files.length > 0) {
+      // Check if all files are images
+      const validImages = files.filter((file) =>
+        file.type.startsWith("image/")
+      );
+      if (validImages.length === files.length) {
+        const updatedPreviews = [...imagePreviews];
+        const newPreviews = validImages.map((file) =>
+          URL.createObjectURL(file)
+        ); // Create previews for each valid image
+        updatedPreviews[index] = [...updatedPreviews[index], ...newPreviews];
+        setImagePreviews(updatedPreviews);
+
+        // Pass the files to the form values
+        const newPhotos = validImages.map((file) => file); // Only store valid images
+        handleChange({
+          target: {
+            name: `variations.${index}.photos`,
+            value: [...values.variations[index].photos, ...newPhotos],
+          },
+        });
+      } else {
+        alert("Only image files are allowed.");
+      }
+    }
+  };
+
+  const handleDeleteImage = (variationIndex, imageIndex) => {
+    // Remove the deleted image from the preview and the form values
+    const updatedPreviews = [...imagePreviews];
+    updatedPreviews[variationIndex].splice(imageIndex, 1);
+    setImagePreviews(updatedPreviews);
+
+    const updatedPhotos = [...values.variations[variationIndex].photos];
+    updatedPhotos.splice(imageIndex, 1);
+    handleChange({
+      target: {
+        name: `variations.${variationIndex}.photos`,
+        value: updatedPhotos,
+      },
+    });
+  };
   return (
     <div className="variation-container">
       <FieldArray name="variations">
@@ -172,7 +229,13 @@ function VariationForm({ values, handleChange, errors, touched }) {
           <>
             <Typography variant="h6">Variations</Typography>
             {values.variations?.map((variation, index) => (
-              <Box key={index} mb={2} display="flex" flexDirection="column" gap={2}>
+              <Box
+                key={index}
+                mb={2}
+                display="flex"
+                flexDirection="column"
+                gap={2}
+              >
                 <TextField
                   name={`variations.${index}.variationName`}
                   label="Variation Name"
@@ -187,6 +250,24 @@ function VariationForm({ values, handleChange, errors, touched }) {
                     errors.variations?.[index]?.variationName
                   }
                   fullWidth
+                />
+                <input
+                  type="color"
+                  name={`variations.${index}.colorCode`}
+                  value={variation.colorCode}
+                  onChange={(event) => {
+                    const newColorCode = event.target.value;
+                    // const newColorName = event.target.value.replace("#", "").toUpperCase();
+                    handleChange({
+                      target: {
+                        name: `variations.${index}.colorCode`,
+                        value: newColorCode,
+                      },
+                    });
+                  }}
+                  style={{
+                    width: "100%",
+                  }}
                 />
                 <TextField
                   name={`variations.${index}.colorName`}
@@ -208,8 +289,15 @@ function VariationForm({ values, handleChange, errors, touched }) {
                 <FieldArray name={`variations.${index}.sizeArray`}>
                   {({ remove: removeSize, push: pushSize }) => (
                     <>
+                      <h4>Details</h4>
                       {variation.sizeArray?.map((size, sizeIndex) => (
-                        <Box key={sizeIndex} display="flex" alignItems="center" gap={2}>
+                        <Box
+                          key={sizeIndex}
+                          display="flex"
+                          flexDirection="column"
+                          alignItems=""
+                          gap={2}
+                        >
                           <TextField
                             name={`variations.${index}.sizeArray.${sizeIndex}.size`}
                             label="Size"
@@ -217,15 +305,21 @@ function VariationForm({ values, handleChange, errors, touched }) {
                             onChange={handleChange}
                           />
                           <TextField
-                            name={`variations.${index}.sizeArray.${sizeIndex}.finalAmount`}
+                            name={`variations.${index}.sizeArray.${sizeIndex}.finalPrice`}
                             label="Final Amount"
-                            value={size.finalAmount}
+                            value={size.finalPrice}
                             onChange={handleChange}
                           />
                           <TextField
                             name={`variations.${index}.sizeArray.${sizeIndex}.discount`}
                             label="Discount"
                             value={size.discount}
+                            onChange={handleChange}
+                          />
+                          <TextField
+                            name={`variations.${index}.sizeArray.${sizeIndex}.stock`}
+                            label="Stock"
+                            value={size.stock}
                             onChange={handleChange}
                           />
                           <IconButton
@@ -240,7 +334,7 @@ function VariationForm({ values, handleChange, errors, touched }) {
                         variant="outlined"
                         startIcon={<AddCircleIcon />}
                         onClick={() =>
-                          pushSize({ size: "", finalAmount: "", discount: "" })
+                          pushSize({ size: "", finalPrice: "", discount: "" })
                         }
                       >
                         Add Size
@@ -248,6 +342,61 @@ function VariationForm({ values, handleChange, errors, touched }) {
                     </>
                   )}
                 </FieldArray>
+
+                {/* Multiple Image Upload for Variation */}
+                <Box mt={2}>
+                  <input
+                    type="file"
+                    accept="image/*"
+                    multiple
+                    onChange={(event) => handleFileChange(index, event)}
+                    style={{ display: "none" }}
+                    id={`variation-${index}-image-upload`}
+                  />
+                  <label htmlFor={`variation-${index}-image-upload`}>
+                    <Button variant="contained" component="span">
+                      Upload Images
+                    </Button>
+                  </label>
+
+                  {imagePreviews[index] && (
+                    <Box mt={2} display="flex" gap={2}>
+                      <Typography variant="body2">Image Previews:</Typography>
+                      {imagePreviews[index].map((preview, imageIndex) => (
+                        <Box key={imageIndex} position="relative">
+                          <img
+                            src={
+                              preview instanceof File
+                                ? URL.createObjectURL(preview)
+                                : preview
+                            }
+                            alt={`Variation Image Preview ${imageIndex}`}
+                            style={{
+                              width: "100px",
+                              height: "auto",
+                              objectFit: "cover",
+                              borderRadius: "8px",
+                              marginTop: "10px",
+                            }}
+                          />
+                          <IconButton
+                            color="error"
+                            onClick={() => handleDeleteImage(index, imageIndex)}
+                            style={{
+                              position: "absolute",
+                              top: 0,
+                              right: 0,
+                              backgroundColor: "rgba(255, 255, 255, 0.7)",
+                            }}
+                          >
+                            <RemoveCircleIcon />
+                          </IconButton>
+                        </Box>
+                      ))}
+                    </Box>
+                  )}
+                </Box>
+
                 <Button
                   color="error"
                   onClick={() => remove(index)}
@@ -263,7 +412,7 @@ function VariationForm({ values, handleChange, errors, touched }) {
                 push({
                   variationName: "",
                   colorName: "",
-                  sizeArray: [{ size: "", finalAmount: "", discount: "" }],
+                  sizeArray: [{ size: "", finalPrice: "", discount: "" }],
                 })
               }
               startIcon={<AddCircleIcon />}
@@ -278,5 +427,3 @@ function VariationForm({ values, handleChange, errors, touched }) {
 }
 
 export default VariationForm;
-
-

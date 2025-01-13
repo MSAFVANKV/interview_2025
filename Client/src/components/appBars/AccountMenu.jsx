@@ -82,7 +82,7 @@ export default function AccountMenu() {
         <>
           <Tooltip title="Super Admin">
             <IconButton
-              onClick={() => handleCloseAndNavigate("/admin/dashboard")}
+              onClick={() => handleCloseAndNavigate("/admin/products/add")}
               size="small"
               sx={{ ml: 0 }}
             >

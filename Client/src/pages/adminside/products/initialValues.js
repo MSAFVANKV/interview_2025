@@ -1,13 +1,16 @@
 export  const initialValues = {
-    title: "",
+  productName: "",
     amount: "",
+    thumbnail: null,  
     mrp: "",
     description: "",
     variations: [
       {
         variationName: "",
         colorName: "",
-        sizeArray: [{ size: "", finalAmount: "", discount: "" }],
+        colorCode: "",
+        photos:[],
+        sizeArray: [{ size: "", finalPrice: "", discount: "",stock:"" }],
       },
     ],
   };
