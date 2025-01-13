@@ -9,6 +9,7 @@ import ProductsAddPage from "../pages/adminside/products/add/products-add-page";
 import ProductAllPage from "../pages/adminside/products/all/product-all-page";
 import ProductLayout from "../layout/ProductLayout";
 import AdminApp from "../Admin-App";
+import ProductUsePage from "../pages/user-side/products/product-use-page";
 
 const router = createBrowserRouter([
   {
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       {
         path: "/login", // Protected route
         element: <LoginPage />,
+      },
+      {
+        path: "/product/:id", // Protected route
+        element: <ProductUsePage />,
       },
     ],
   },

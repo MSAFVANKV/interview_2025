@@ -103,12 +103,12 @@ const CartPage = () => {
             <div className="cart-item" key={item.id}>
               <div className="item-details">
                 <img
-                  src={item.thumbnail} // Replace with actual product image URL if available
+                  src={item.thumbnail??""} // Replace with actual product image URL if available
                   alt={item.productName}
                   className="product-image"
                 />
                 <div className="item-info">
-                  <Link to={`/products/${item.id}`}>
+                  <Link to={`/product/${item.id}`}>
                     <Typography
                       variant="h6"
                       className="product-title"
