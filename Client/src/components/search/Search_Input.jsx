@@ -1,30 +1,28 @@
-import React, { useState } from "react";
-import { Badge, IconButton } from "@mui/material";
+import { useState } from "react";
+
 import styled from "@emotion/styled"; // Use @emotion/styled for styling
-import LocalMallIcon from "@mui/icons-material/LocalMall";
-import FavoriteIcon from "@mui/icons-material/Favorite";
+
 import MyInput from "../myUi/MyInput";
-import useNavigateClicks from "../../hooks/navigate-clicks";
-import { useSelector } from "react-redux";
+
 import AccountMenu from "../appBars/AccountMenu";
 // Styled container using @emotion/styled
 const Container = styled("div")`
   display: flex;
   align-items: center;
   gap: 5px;
-   @media screen and (max-width: 700px) {
+  @media screen and (max-width: 700px) {
     display: none;
   }
 `;
 
 function SearchInput() {
   const [value, setValue] = useState("");
-  const {handleClick} = useNavigateClicks()
-  const cartItems = useSelector((state) => state.cart.items);
+  // const {handleClick} = useNavigateClicks()
+  // const cartItems = useSelector((state) => state.cart.items);
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
+  // const handleChange = (event) => {
+  //   setValue(event.target.value);
+  // };
   return (
     <Container>
       <MyInput
@@ -39,13 +37,13 @@ function SearchInput() {
           "& .MuiOutlinedInput-root": {
             borderColor: "green",
           },
-          display:{
-            md:"block"
-          }
+          display: {
+            md: "block",
+          },
         }}
       />
 
-{/* 
+      {/* 
         <IconButton
         onClick={()=>{
           handleClick("/cart")
@@ -66,8 +64,7 @@ function SearchInput() {
         >
           <FavoriteIcon sx={{ color: "white" }} />
         </IconButton> */}
-        <AccountMenu/>
-    
+      <AccountMenu />
     </Container>
   );
 }

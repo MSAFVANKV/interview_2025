@@ -91,6 +91,12 @@
     background-color: $color;
   }
 }
+// text colors
+@each $name, $color in vars.$colors {
+  .text-#{$name} {
+    color: $color;
+  }
+}
 
 // Padding Utilities
 @for $i from 1 through 10 {

@@ -26,10 +26,8 @@ app.use(express.urlencoded({ extended: true }));
 // Allowed origins for CORS
 const allowedOrigins = [
   "http://localhost:5173", // Frontend during development
-  "http://localhost:3000",
-  "http://localhost:3005",
-  "https://www.uracca.com",
-  "https://www.admin.uracca.com",
+  "http://localhost:5174",
+
 ];
 
 // CORS Middleware
