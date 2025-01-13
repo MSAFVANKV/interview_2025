@@ -2,11 +2,11 @@ import asyncHandler from "../middlewares/asyncHandler.js";
 import Product from "../modals/product.js";
 
 export const createProduct = asyncHandler(async (req, res) => {
-  console.log("req.body;");
+  // console.log("req.body;");
 
   try {
     const { productName, mrp, description, size, stock, variations } = req.body;
-    console.log(req.body, "req.body;");
+    // console.log(req.body, "req.body;");
 
     const existingProduct = await Product.findOne({ productName });
 
@@ -16,7 +16,7 @@ export const createProduct = asyncHandler(async (req, res) => {
 
     const basePath = `${req.secure ? "https" : "http"}://${req.get("host")}/`;
 
-    console.log(req.files);
+    // console.log(req.files);
     const thumbnail = req.files["thumbnail"]
       ? req.files["thumbnail"].map(
           (file) => `${basePath}${file.path.replace(/\\/g, "/")}`
@@ -93,7 +93,7 @@ export const getAllProducts = asyncHandler(async (req, res) => {
 // =================================================================
 export const deleteProduct = asyncHandler(async (req, res) => {
   try {
-    console.log(req.params.productId, "req.params.productId");
+    // console.log(req.params.productId, "req.params.productId");
 
     const product = await Product.findByIdAndDelete(req.params.productId);
 
@@ -114,7 +114,7 @@ export const deleteProduct = asyncHandler(async (req, res) => {
 export const updateProduct = asyncHandler(async (req, res) => {
   try {
     const productId = req.params.id;
-    console.log(productId, "productId");
+    // console.log(productId, "productId");
 
     const {
       productName,
@@ -190,7 +190,7 @@ export const getSingleProduct = asyncHandler(async (req, res) => {
   try {
     const product = await Product.findById(productId);
 
-    console.log(product);
+    // console.log(product);
 
     if (!product) {
       return res.status(204).json({ message: "Product not found" });

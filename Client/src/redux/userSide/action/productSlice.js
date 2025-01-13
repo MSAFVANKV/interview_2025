@@ -16,13 +16,9 @@ export const fetchSingleProduct = createAsyncThunk(
   async (slugId, { rejectWithValue }) => {
     try {
       const response = await Fetch_Single_Product_Api(slugId);
-      console.log(response);
+    //   console.log(response);
       return response.data;
-    //   if (response.status === 201) {
-    //     return response.data;
-    //   } else {
-    //     return rejectWithValue("Failed to fetch admin details");
-    //   }
+
     } catch (error) {
       return rejectWithValue(
         error.response ? error.response.data : "Network error"

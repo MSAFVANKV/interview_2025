@@ -11,8 +11,6 @@
 // import { useDispatch } from "react-redux";
 // import { addToCart } from "../../redux/userSide/action/cartSlice";
 
-
-
 // const products = [
 //   {
 //     id: 1,
@@ -65,7 +63,7 @@
 
 //   const handleAddToCart = (product) => {
 //     console.log(product,'add cart');
-    
+
 //     dispatch(
 //       addToCart({
 //         id: product.id,
@@ -158,12 +156,10 @@
 //     </Box>
 //   );
 // }
-import React from "react";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
-import Button from "@mui/material/Button";
 import Typography from "@mui/material/Typography";
 import Grid from "@mui/material/Grid2";
 import { Box, IconButton } from "@mui/material";
@@ -171,83 +167,59 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useDispatch, useSelector } from "react-redux";
 import { addToCart } from "../../redux/userSide/action/cartSlice";
 import { makeToast, makeToastWarning } from "../../lib/helper";
-import { Navigate, useNavigate } from "react-router";
+import { Link, useNavigate } from "react-router";
+import { useQuery } from "@tanstack/react-query";
+import { GET_ALL_PRODUCTS } from "../../routers/urlPth";
+import axios from "axios";
 
-const products = [
-  {
-    id: 1,
-    title: "Lizard",
-    amount: "300",
-    mrp: "500",
-    description: "Lizards are a widespread group of squamate reptiles.",
-    variations: [
-      {
-        id: 1,
-        variationName: "Standard",
-        colorName: "Green",
-        colorCode: "#00FF00",
-        photos: ["/static/images/cards/contemplative-reptile.jpg"],
-        sizeArray: [
-          {
-            discount: "30",
-            finalAmount: "300",
-            discountType: "amount",
-            size: "M",
-          },
-        ],
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: "Pallazo",
-    amount: "300",
-    mrp: "500",
-    description: "Lizards are a widespread group of squamate reptiles.",
-    variations: [
-      {
-        id: 1,
-        variationName: "Standard",
-        colorName: "Green",
-        colorCode: "#00FF00",
-        photos: ["/static/images/cards/contemplative-reptile.jpg"],
-        sizeArray: [
-          {
-            discount: "30",
-            finalAmount: "300",
-            discountType: "amount",
-            size: "M",
-          },
-        ],
-      },
-    ],
-  },
-  // Additional products...
-];
+import CircularProgress from "@mui/material/CircularProgress";
 
 export default function LatestsProducts() {
   const dispatch = useDispatch();
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   const { isLogged } = useSelector((state) => state.auth);
+  // const {products} = useSelector((state)=>state.product);
+
+  const { data = [], isLoading } = useQuery({
+    queryKey: ["products"],
+    queryFn: async () => {
+      try {
+        const { data } = await axios.get(GET_ALL_PRODUCTS, {
+          withCredentials: true,
+        });
+        return data;
+      } catch (error) {
+        console.error("Error fetching products:", error);
+        return [];
+      }
+    },
+  });
+
+  // useEffect(()=>{
+  //   if(data){
+  //     dispatch(setProductData(data))
+  //   }
+  // },[]);
 
   const handleAddToCart = async (product, sizeData) => {
     if (!isLogged) {
       navigate("/login"); // Use navigate to redirect to login
-      makeToastWarning("Please Login")
+      makeToastWarning("Please Login");
       return;
     }
-    const { id, title, mrp } = product;
-    const { size, finalAmount } = sizeData;
-  
+    const { _id, productName, mrp, thumbnail } = product;
+    const { size, finalPrice } = sizeData;
+
     try {
       // Dispatch action and wait for the result if it's a promise
       await dispatch(
         addToCart({
-          id,
-          name: title,
+          id:_id,
+          productName: productName,
           mrp,
-          amount: finalAmount,
+          finalPrice: finalPrice,
           size,
+          thumbnail:thumbnail,
           quantity: 1,
         })
       );
@@ -258,7 +230,6 @@ export default function LatestsProducts() {
       makeToast("Failed to add to cart");
     }
   };
-  
 
   return (
     <Box
@@ -274,76 +245,87 @@ export default function LatestsProducts() {
       <Typography variant="h5" component="h2">
         Latest Products
       </Typography>
-      <Grid container spacing={2}>
-        {products.map((product) => (
-          <Grid container xs={12} sm={6} md={2} key={product.id}>
-            <Card sx={{ maxWidth: 310, minWidth: 300 }}>
-              <CardMedia
-                component="img"
-                alt={product.title}
-                height="140"
-                image={product.variations[0].photos[0]}
-              />
-              <CardContent>
-                <Typography gutterBottom variant="h5" component="div">
-                  {product.title}
-                </Typography>
-                <Box
-                  sx={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "0.5rem",
-                  }}
-                >
-                  <Typography
-                    gutterBottom
-                    variant="h6"
-                    component="div"
-                    sx={{ textDecoration: "line-through", color: "gray" }}
+      {isLoading ? (
+        <CircularProgress
+          color="inherit"
+          sx={{
+            mt: "5em",
+          }}
+        />
+      ) : (
+        <Grid container spacing={2}>
+          {data.map((product) => (
+            <Grid container xs={12} sm={6} md={2} key={product.id}>
+              <Card sx={{ maxWidth: 310, minWidth: 300 }}>
+               <Link to={`/product/${product._id}`}>
+               <CardMedia
+                  component="img"
+                  alt={product.productName}
+                  height="240"
+                  image={product.variations[0].photos[0]}
+                />
+               </Link>
+                <CardContent>
+                  <Typography gutterBottom variant="h6" component="div">
+                    {product.productName}
+                  </Typography>
+                  <Box
+                    sx={{
+                      display: "flex",
+                      alignItems: "center",
+                      gap: "0.5rem",
+                    }}
                   >
-                    ₹{product.mrp}
-                  </Typography>
-                  <Typography gutterBottom variant="body2" component="div">
-                    ₹{product.variations[0].sizeArray[0].finalAmount}
-                  </Typography>
-                  <Typography
-                    gutterBottom
-                    variant="body2"
-                    component="div"
-                    color="green"
+                    <Typography
+                      gutterBottom
+                      variant="h6"
+                      component="div"
+                      sx={{ textDecoration: "line-through", color: "gray" }}
+                    >
+                      ₹{product.mrp}
+                    </Typography>
+                    <Typography gutterBottom variant="body2" component="div">
+                      ₹{product.variations[0].sizeArray[0].finalPrice}
+                    </Typography>
+                    <Typography
+                      gutterBottom
+                      variant="body2"
+                      component="div"
+                      color="green"
+                    >
+                      {/* {product.variations[0].sizeArray[0].discountType ===
+                      "amount"
+                        ? "₹"
+                        : "%"} */}
+                      {product.variations[0].sizeArray[0].discount} Rs
+                    </Typography>
+                  </Box>
+                </CardContent>
+                <CardActions>
+                  <IconButton
+                    color="primary"
+                    aria-label="add to shopping cart"
+                    sx={{
+                      width: "100%",
+                      border: "1px solid #ccc",
+                      padding: "0.5rem",
+                      borderRadius: "10px",
+                    }}
+                    onClick={() =>
+                      handleAddToCart(
+                        product,
+                        product.variations[0].sizeArray[0]
+                      )
+                    }
                   >
-                    {product.variations[0].sizeArray[0].discountType ===
-                    "amount"
-                      ? "₹"
-                      : "%"}
-                    {product.variations[0].sizeArray[0].discount}
-                  </Typography>
-                </Box>
-              </CardContent>
-              <CardActions>
-                <IconButton
-                  color="primary"
-                  aria-label="add to shopping cart"
-                  sx={{
-                    width: "100%",
-                    border: "1px solid #ccc",
-                    padding: "0.5rem",
-                    borderRadius: "10px",
-                  }}
-                  onClick={() =>
-                    handleAddToCart(
-                      product,
-                      product.variations[0].sizeArray[0]
-                    )
-                  }
-                >
-                  <AddShoppingCartIcon />
-                </IconButton>
-              </CardActions>
-            </Card>
-          </Grid>
-        ))}
-      </Grid>
+                    <AddShoppingCartIcon />
+                  </IconButton>
+                </CardActions>
+              </Card>
+            </Grid>
+          ))}
+        </Grid>
+      )}
     </Box>
   );
 }

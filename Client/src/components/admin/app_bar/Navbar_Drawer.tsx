@@ -191,8 +191,8 @@ export default function NavbarDrawer() {
         {/* <Divider /> */}
         <List>
           {NAVIGATION.map((item, index) => {
-            console.log(item.segment,'segment');
-            console.log(pathname,'pathname');
+            // console.log(item.segment,'segment');
+            // console.log(pathname,'pathname');
 
 
 

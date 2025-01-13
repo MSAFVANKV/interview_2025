@@ -6,7 +6,7 @@ function NavigationList() {
    const NAVIGATION = [
     {
       kind: "page",
-      segment: "/admin/dashboard",
+      segment: "/dashboard",
       title: "Dashboard",
       icon: <Icon icon="material-symbols:dashboard-rounded" />,
     },
@@ -21,10 +21,10 @@ function NavigationList() {
       children: [
         { title: "Add New Product", segment: "/products/add" },
         { title: "All Products", segment: "/products/all" },
-        { title: "Category", segment: "/products/category" },
-        { title: "Brand", segment: "/products/brand" },
-        { title: "Product Reviews", segment: "/products/reviews" },
-        { title: "Colors", segment: "/products/colors" },
+        // { title: "Category", segment: "/products/category" },
+        // { title: "Brand", segment: "/products/brand" },
+        // { title: "Product Reviews", segment: "/products/reviews" },
+        // { title: "Colors", segment: "/products/colors" },
       ],
     },
    

@@ -131,7 +131,7 @@ export default function NavAppBar({
 
           <Tooltip title="home">
           <div className="">
-          <IconButton onClick={() => handleClick("/dashboard")}>
+          <IconButton onClick={() => handleClick("/")}>
               <PublicOutlined />
             </IconButton>
           </div>

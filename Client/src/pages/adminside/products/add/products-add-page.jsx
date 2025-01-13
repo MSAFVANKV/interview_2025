@@ -94,6 +94,10 @@ function ProductsAddPage() {
       // });
 
       if (response.status === 200) {
+        if (slugId) {
+          dispatch(fetchSingleProduct(slugId));
+          // fetchSingleProduct();
+        }
         makeToast(`${response.data.message}`);
       }
 
