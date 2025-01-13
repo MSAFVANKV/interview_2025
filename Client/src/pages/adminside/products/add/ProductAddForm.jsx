@@ -1,16 +1,21 @@
-import {  TextField, Box, Typography } from "@mui/material";
+import { TextField, Box, Typography } from "@mui/material";
 import PropTypes from "prop-types";
-import { useState } from "react";
-import {makeToastError} from '../../../../lib/helper'
-function ProductAddForm(props ) {
-    const { values, handleChange, errors, touched } = props;
-    // console.log(values,'values prod --');
-    
+import {  useState } from "react";
+import { makeToastError } from "../../../../lib/helper";
 
-    const [imagePreview, setImagePreview] = useState(values.thumbnail || null);
-    // console.log(imagePreview,'imagePreview prod --');
-    
 
+function ProductAddForm(props) {
+  const { values, handleChange, errors, touched } = props;
+ 
+  const [imagePreview, setImagePreview] = useState(values.thumbnail || null);
+
+
+
+  
+
+  // console.log(values,'values prod --');
+
+  // console.log(imagePreview,'imagePreview prod --');
 
   const handleFileChange = (event) => {
     const file = event.target.files[0];
@@ -24,7 +29,6 @@ function ProductAddForm(props ) {
         handleChange({
           target: { name: "thumbnail", value: file },
         });
-        
       } else {
         makeToastError("Only image files are allowed.");
       }
@@ -44,14 +48,7 @@ function ProductAddForm(props ) {
           error={touched.productName && !!errors.productName}
           helperText={touched.productName && errors.productName}
         />
-        <TextField
-          name="amount"
-          label="Amount"
-          value={values.amount}
-          onChange={handleChange}
-          error={touched.amount && !!errors.amount}
-          helperText={touched.amount && errors.amount}
-        />
+      
         <TextField
           name="mrp"
           label="MRP"
@@ -70,8 +67,8 @@ function ProductAddForm(props ) {
           error={touched.description && !!errors.description}
           helperText={touched.description && errors.description}
         />
-          {/* Thumbnail Image Upload */}
-          <Box>
+        {/* Thumbnail Image Upload */}
+        <Box>
           <TextField
             type="file"
             name="thumbnail"
@@ -91,7 +88,11 @@ function ProductAddForm(props ) {
               <Typography variant="body2">Image Preview:</Typography>
               <img
                 // Only create an object URL if imagePreview is a file
-                src={imagePreview instanceof File ? URL.createObjectURL(imagePreview) : imagePreview}
+                src={
+                  imagePreview instanceof File
+                    ? URL.createObjectURL(imagePreview)
+                    : imagePreview
+                }
                 alt="Thumbnail Preview"
                 style={{
                   width: "100px",

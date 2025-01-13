@@ -7,6 +7,12 @@ export const PRODUCT_ADD = `${MAIN_URL}/product/add-product`
 export const GET_ALL_PRODUCTS = `${MAIN_URL}/product/all-products`
 export const DELETE_PRODUCTS = `${MAIN_URL}/product/delete-products`
 
+export const UPDATE_PRODUCTS = `/product/updateProduct`;
+
+export const SINGLE_PRODUCTS = `/product/getSingleProduct`;
+
+
+
 
 
 

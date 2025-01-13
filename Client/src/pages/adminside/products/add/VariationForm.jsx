@@ -170,12 +170,29 @@ function VariationForm({ values, handleChange, errors, touched }) {
     values.variations.map(() => []) // Initialize an empty preview array for each variation
   );
 
+  // useEffect(() => {
+  //   const newPreviews = values.variations.map(
+  //     (variation) => variation.photos.map((photo) => URL.createObjectURL(photo)) // Convert photos to object URLs
+  //   );
+  //   setImagePreviews(newPreviews);
+  // }, [values.variations]);
   useEffect(() => {
-    const newPreviews = values.variations.map(
-      (variation) => variation.photos.map((photo) => URL.createObjectURL(photo)) // Convert photos to object URLs
+    const newPreviews = values.variations.map((variation) =>
+      variation.photos.map((photo) => {
+        // Check if the photo is a File object or a string
+        if (photo instanceof File) {
+          // If it's a File, create an object URL
+          return URL.createObjectURL(photo);
+        } else if (typeof photo === 'string') {
+          // If it's already a string (URL or image path), return it as is
+          return photo;
+        }
+        return null; // In case of an unexpected value, return null
+      })
     );
     setImagePreviews(newPreviews);
   }, [values.variations]);
+  
 
   const handleFileChange = (index, event) => {
     const files = Array.from(event.target.files); // Get all selected files

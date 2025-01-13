@@ -8,8 +8,11 @@ import ExpandLessIcon from "@mui/icons-material/ExpandLess";
 import axios from "axios";
 import { DELETE_PRODUCTS, GET_ALL_PRODUCTS } from "../../../../routers/urlPth";
 import { useState } from "react";
+import EditIcon from '@mui/icons-material/Edit';
+import useNavigateClicks from "../../../../hooks/navigate-clicks";
 
 function ProductAllPage() {
+  const {handleClick} = useNavigateClicks();
   const [expandedRow, setExpandedRow] = useState(null); // Expanded product row
   const [expandedVariation, setExpandedVariation] = useState(null); // Expanded variation row
 
@@ -28,7 +31,7 @@ function ProductAllPage() {
     },
   });
 
-  console.log(data,'data');
+  // console.log(data,'data');
   
 
   const handleDelete = async (productId) => {
@@ -154,9 +157,19 @@ function ProductAllPage() {
       width: 150,
       renderCell: (params) =>
         params.row.parentId ? null : (
-          <IconButton onClick={() => handleDelete(params.row.id)}>
+
+          <div>
+            <IconButton onClick={() => handleDelete(params.row.id)}>
             <DeleteIcon />
           </IconButton>
+          <IconButton onClick={() => {
+            handleClick(`/admin/products/add?edit=${params.row.id}`);  // Navigate to edit product page with productId as parameter  // handleClick is a custom hook to navigate using react-router-dom's useNavigate() function  // Replace '/admin/products/edit/:productId' with your actual route path  // This will navigate to the edit product page with the selected product's ID in the URL
+  
+          }}>
+            <EditIcon />
+          </IconButton>
+          </div>
+        
         ),
     },
     {
