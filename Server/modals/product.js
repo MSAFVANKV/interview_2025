@@ -6,11 +6,6 @@ const variationSizeSchema = new mongoose.Schema({
   stock: { type: Number, required: false },
   discount: { type: Number, default: 0 },
   finalPrice: { type: Number, required: false },
-  discountType: {
-    type: String,
-    enum: ["percentage", "amount"],
-    required: false,
-  },
   sku: { type: String },
 });
 
@@ -22,27 +17,15 @@ const variationSchema = new mongoose.Schema({
   photos: { type: [String], default: [] },
 });
 
-
-
 const productSchema = new mongoose.Schema({
   productName: { type: String },
 
   slug: { type: String, unique: true },
 
-  categoryId: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "Category",
-  },
   description: { type: String },
 
   mrp: { type: Number },
-  keyWords: { type: [String], index: true },
 
-  published: { type: Boolean },
-  specialFeatures: { type: String },
-  featured: { type: Boolean },
-  deliveryCharge: { type: Number },
-  todaysDeal: { type: Boolean, default: false },
   thumbnail: { type: [String] },
 
   variations: [variationSchema],
@@ -50,8 +33,6 @@ const productSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  rating: { type: Number, default: 0 },
-  numberOfReviews: { type: Number, default: 0 },
 });
 
 productSchema.pre("validate", function (next) {

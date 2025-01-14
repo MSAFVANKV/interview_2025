@@ -31,7 +31,6 @@
     "sass": "^1.83.1",
     "slick-carousel": "^1.8.1",
     "tailwind-merge": "^2.6.0",
-    "tailwindcss-debug-screens": "^2.2.1",
     "yup": "^1.6.1"
   },
   "devDependencies": {

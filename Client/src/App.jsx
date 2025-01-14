@@ -11,7 +11,7 @@ import Footer from './components/appBars/Footer/footer'
 
 function App() {
   const client = new QueryClient();
- 
+
 
   const restrictedUrls = [
     "/cart",
@@ -20,22 +20,21 @@ function App() {
   ]
 
   return (
-    <div   className={cn(`section-container`, {
-          "debug-screens": import.meta.env.MODE === "development",
-        })}>
-          <Navbar />
-          {
-             !restrictedUrls.some((path) => window.location.pathname.startsWith(path))
-           && (
-              <CategoyBar />
-            )
-          }
-           <QueryClientProvider client={client}>
-           <Outlet/>
-           </QueryClientProvider>
-           <Footer/>
-   
-       
+    <div className={cn(`section-container`, {
+    })}>
+      <Navbar />
+      {
+        !restrictedUrls.some((path) => window.location.pathname.startsWith(path))
+        && (
+          <CategoyBar />
+        )
+      }
+      <QueryClientProvider client={client}>
+        <Outlet />
+      </QueryClientProvider>
+      <Footer />
+
+
     </div>
   )
 }
