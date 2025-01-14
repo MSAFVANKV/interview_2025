@@ -10,6 +10,7 @@ import ProductAllPage from "../pages/adminside/products/all/product-all-page";
 import ProductLayout from "../layout/ProductLayout";
 import AdminApp from "../Admin-App";
 import ProductUsePage from "../pages/user-side/products/product-use-page";
+import BannersPage from "../pages/adminside/banners/banners-page";
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,12 @@ const router = createBrowserRouter([
           //   { path: "category", element: <CategoryPage /> },
         ],
       },
+      {
+        path:"banners",
+        element:(
+          <BannersPage/>
+        )
+      }
     ],
   },
   {

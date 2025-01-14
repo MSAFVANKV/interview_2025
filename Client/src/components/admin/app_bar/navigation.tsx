@@ -10,7 +10,12 @@ function NavigationList() {
       title: "Dashboard",
       icon: <Icon icon="material-symbols:dashboard-rounded" />,
     },
-
+    {
+      kind: "page",
+      segment: "/banners",
+      title: "Banners",
+      icon: <Icon icon="ph:flag-banner-fold-fill" />,
+    },
    
     {
       kind: "page",

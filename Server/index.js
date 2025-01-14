@@ -9,6 +9,8 @@ import { server_Config } from './services/server_config.js';
 import { ConnectDb } from './services/db.config.js';
 import userRouter from './routers/userRoute.js';
 import ProductRouter from './routers/productsRoute.js';
+import BannerRouter from './routers/bannerRoute.js';
+
 
 
 dotenv.config();
@@ -53,6 +55,8 @@ app.options("*", cors());
 // Routes
 app.use('/user', userRouter);
 app.use('/product', ProductRouter);
+app.use('/banners', BannerRouter);
+
 
 
 // Start server and connect database

@@ -11,6 +11,10 @@ export const UPDATE_PRODUCTS = `/product/updateProduct`;
 
 export const SINGLE_PRODUCTS = `/product/getSingleProduct`;
 
+// ====== banners =====
+export const BANNERS_ADD = `/banners/add-banner`;
+
+
 
 
 
