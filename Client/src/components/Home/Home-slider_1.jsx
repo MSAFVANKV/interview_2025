@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import { styled } from "@mui/material";
 import Slider from "react-slick";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { Fetch_Banners_Api } from '../../routers/product-api';
 
 const Container = styled("div")`
 //   min-height: 100vh;
@@ -31,6 +32,24 @@ const PrevArrow = (props) => {
 
 
 function HomeSlider1() {
+    const [banners, setBanners] = useState([]);
+    useEffect(() => {
+      fetchBaners();
+    }, []);
+  
+    const fetchBaners = async () => {
+      try {
+        const res = await Fetch_Banners_Api();
+        if (res.status === 200) {
+          const filterBanner = res.data.find((data)=>{return data.banner})
+          console.log(filterBanner);
+          
+          setBanners(filterBanner.banner);
+        }
+      } catch (error) {
+        console.log(error);
+      }
+    };
     const images = [
         { src: "https://placehold.co/800x400", alt: "Banner 1" },
         { src: "https://placehold.co/800x400", alt: "Banner 2" },
@@ -43,7 +62,9 @@ function HomeSlider1() {
       const settings = {
         dots: true,
         infinite: true,
+        autoplay: true,
         speed: 500,
+        autoplaySpeed: 2000,
         slidesToShow: 1,
         slidesToScroll: 1,
         nextArrow: <NextArrow />,
@@ -53,9 +74,9 @@ function HomeSlider1() {
     <Container className="py-5 bg-white">
     <div className="slider-container ">
       <Slider {...settings}>
-        {images.map((image, index) => (
+        {banners.map((image, index) => (
           <div key={index}>
-            <img src={image.src} alt={image.alt} className="slider-image" />
+            <img src={image} alt={'as'} className="slider-image" />
           </div>
         ))}
       </Slider>
