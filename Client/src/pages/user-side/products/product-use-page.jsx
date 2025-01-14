@@ -8,6 +8,7 @@ import ProductCardImg from "./product_card_img";
 import "./userProd.scss";
 import { makeToast, makeToastError } from "../../../lib/helper";
 import { addToCart } from "../../../redux/userSide/action/cartSlice";
+import { fetchUserDetails } from "../../../redux/userSide/action/authSlice";
 
 function ProductUsePage() {
   const dispatch = useDispatch();
@@ -42,6 +43,9 @@ function ProductUsePage() {
   };
 
   // Handle the case where `products` is still being fetched or not available
+    useEffect(()=>{
+      dispatch(fetchUserDetails())
+    },[dispatch])
 
 
   const handleAddToCart = async (product, sizeData) => {
@@ -107,7 +111,13 @@ function ProductUsePage() {
         <Typography variant="body1">{products.description}</Typography>
         <Grid container spacing={2}>
           <Grid item xs={12} md={6}>
-            <Typography variant="h6">Price: ₹{products.mrp}</Typography>
+            <Typography variant="body1" >Price: ₹{products.mrp}</Typography>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Typography variant="body2"> ₹{selectedImage?.sizeArray[0]?.finalPrice}</Typography>
+          </Grid>
+          <Grid item xs={12} md={6}>
+            <Typography variant="body2"  color="green"> ₹{selectedImage?.sizeArray[0]?.discount}</Typography>
           </Grid>
         </Grid>
         {/* == */}

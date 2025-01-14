@@ -7,6 +7,7 @@ import './assets/css/components.scss'
 import { Outlet, } from 'react-router'
 import CategoyBar from './components/appBars/Categoy-Bar'
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
+import Footer from './components/appBars/Footer/footer'
 
 function App() {
   const client = new QueryClient();
@@ -32,6 +33,7 @@ function App() {
            <QueryClientProvider client={client}>
            <Outlet/>
            </QueryClientProvider>
+           <Footer/>
    
        
     </div>

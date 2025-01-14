@@ -78,20 +78,56 @@ function Navbar() {
 
       {/* Sidebar */}
       <Drawer anchor="right" open={drawerOpen} onClose={toggleDrawer(false)}>
-        <List className="navbar__drawer">
-          <ListItem button>
-            <ListItemText primary="Home" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="About" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Services" />
-          </ListItem>
-          <ListItem button>
-            <ListItemText primary="Contact" />
-          </ListItem>
-        </List>
+      <List className="navbar__drawer"
+    sx={{
+      width: {
+        xs: "90vw", // Applies to extra-small (xs) and small (sm) screens
+        sm: "60vw", // Applies from the small (sm) breakpoint and larger
+      },
+    }}
+    
+      >
+  <ListItem
+    button
+    onClick={() => {
+      handleClick('/');
+      setDrawerOpen(false);
+    }}
+  >
+    <ListItemText primary="Home" />
+  </ListItem>
+  <ListItem
+    button
+    onClick={() => {
+      handleClick('/admin/products/add');
+      setDrawerOpen(false);
+    }}
+  >
+    <ListItemText primary="Admin" />
+  </ListItem>
+  <ListItem
+    button
+    onClick={() => {
+      handleClick('/cart');
+      setDrawerOpen(false);
+    }}
+  >
+    <ListItemText primary="Cart" />
+  </ListItem>
+  <ListItem
+    button
+    onClick={() => {
+      window.scrollTo({
+        top: document.body.scrollHeight, // Scroll to the bottom of the page
+        behavior: 'smooth', // Smooth scrolling
+      });
+      setDrawerOpen(false);
+    }}
+  >
+    <ListItemText primary="Contact" />
+  </ListItem>
+</List>
+
       </Drawer>
     </AppBar>
   );

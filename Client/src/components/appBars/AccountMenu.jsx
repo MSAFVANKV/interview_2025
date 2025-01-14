@@ -106,6 +106,7 @@ export default function AccountMenu() {
               onClick={() => handleCloseAndNavigate("/cart")}
               size="small"
               sx={{ ml: 0 }}
+              color="white"
             >
               <Badge
                 badgeContent={cartItems.length} // Display the number of items in the cart
@@ -119,6 +120,7 @@ export default function AccountMenu() {
                     icon={`mynaui:cart`}
                     fontSize={25}
                     className="text-black"
+                    color="white"
                   />
                 </Avatar>
               </Badge>
@@ -174,7 +176,7 @@ export default function AccountMenu() {
         </MenuItem>
         {/* <Divider sx={{ my: 1 }} /> */}
         <MenuItem
-          onClick={() => handleCloseAndNavigate("/my-account")}
+          onClick={() => handleCloseAndNavigate("/admin/products/add")}
           sx={{
             display: "flex",
             justifyContent: "space-between",
