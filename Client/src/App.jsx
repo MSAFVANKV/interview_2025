@@ -1,17 +1,16 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+
 import './App.css'
 import './app.scss'
 import { cn } from './lib/utils'
 import Navbar from './components/appBars/Navbar'
 import './assets/css/components.scss'
-import { Outlet, useLocation } from 'react-router'
+import { Outlet, } from 'react-router'
 import CategoyBar from './components/appBars/Categoy-Bar'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 function App() {
-  const [count, setCount] = useState(0)
-  const {pathname} = useLocation();
+  const client = new QueryClient();
+ 
 
   const restrictedUrls = [
     "/cart",
@@ -30,8 +29,11 @@ function App() {
               <CategoyBar />
             )
           }
+           <QueryClientProvider client={client}>
+           <Outlet/>
+           </QueryClientProvider>
    
-          <Outlet/>
+       
     </div>
   )
 }

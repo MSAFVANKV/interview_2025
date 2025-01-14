@@ -1,6 +1,5 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
-import { FETCH_USER_DATA } from "../../../routers/urlPth";
-import axios from 'axios';
+
 import { Fetch_User } from "../../../routers/api";
 
 // Initial state

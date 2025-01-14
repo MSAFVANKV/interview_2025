@@ -1,0 +1,43 @@
+.product-tabs{
+    display: flex;
+    padding: "10px";
+    width: 500px;
+    border-radius: "10px";
+    margin-bottom: "10px";
+    border-radius: 5px;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    .main-details,
+    .variants{
+        width: 50%;
+        padding: 0.6rem;
+        font-size: 0.9rem;
+        font-weight: 700;
+        cursor: pointer;
+        &:hover {
+            background-color: #F5E9FF;
+          }
+    }
+    .active-tab {
+        color: white;
+        background-color: #5F08B1;
+        &:hover {
+        color: black;
+
+            background-color: #baa5cb;
+          }
+      }
+}
+
+.product-container{
+    min-height: 100vh;
+    margin-top: 2rem;
+    width: 100%;
+    padding: 1rem;
+    border-radius: 10px;
+    .variation-container,
+    .add-container
+    {
+        width: 50%;
+        margin: auto;
+    }
+}

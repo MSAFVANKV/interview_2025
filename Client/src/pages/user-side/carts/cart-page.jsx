@@ -1,6 +1,6 @@
-import React from "react";
-import { Box, Button, Typography, TextField } from "@mui/material";
-import styled from "@emotion/styled";
+
+import { Box, Button, Typography } from "@mui/material";
+
 import "./CartPage.scss"; // Import your Sass file
 import { Link } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
@@ -27,7 +27,7 @@ const CartPage = () => {
 
   const calculateTotal = () => {
     return cartItems.reduce(
-      (total, item) => total + item.price * item.quantity,
+      (total, item) => total + item.finalPrice * item.quantity,
       0
     );
   };
@@ -103,12 +103,12 @@ const CartPage = () => {
             <div className="cart-item" key={item.id}>
               <div className="item-details">
                 <img
-                  src="https://via.placeholder.com/100" // Replace with actual product image URL if available
-                  alt={item.name}
+                  src={item.thumbnail??""} // Replace with actual product image URL if available
+                  alt={item.productName}
                   className="product-image"
                 />
                 <div className="item-info">
-                  <Link to={`/products/${item.id}`}>
+                  <Link to={`/product/${item.id}`}>
                     <Typography
                       variant="h6"
                       className="product-title"
@@ -120,7 +120,7 @@ const CartPage = () => {
                         maxWidth: "60%",
                       }}
                     >
-                      {item.name}
+                      {item.productName}
                     </Typography>
                   </Link>
                   <Typography variant="body2" color="green">
@@ -128,10 +128,10 @@ const CartPage = () => {
                   </Typography>
                   <Typography variant="body2">Quantity: {item.quantity}</Typography>
                   <Typography variant="body2" className="price">
-                    {item.size}
+                    Size:{item.size}
                   </Typography>
                   <Typography variant="body2" className="price">
-                    ₹{item.amount}
+                    ₹{item.finalPrice}
                   </Typography>
 
                   {/* Quantity Controls */}
@@ -180,36 +180,26 @@ const CartPage = () => {
       </div>
       
 
-      <div className="price-details">
+       {/* Price Details */}
+       <div className="price-details">
         <Typography variant="h5">Price Details:</Typography>
         <div className="price-row">
-          <Typography>Price (1 item):</Typography>
-          <Typography>₹440.00</Typography>
+          <Typography>Total Items:</Typography>
+          <Typography>{cartItems.length}</Typography>
         </div>
         <div className="price-row">
-          <Typography>Discount:</Typography>
-          <Typography color="green">-₹149.00</Typography>
+          <Typography>Total Price:</Typography>
+          <Typography>₹{calculateTotal().toFixed(2)}</Typography>
         </div>
-        <div className="price-row">
-          <Typography>Shipping:</Typography>
-          <Typography>No shipping charge</Typography>
-        </div>
-        {/* <div className="price-row">
-          <Typography>Used Coupons:</Typography>
-          <Typography>-0</Typography>
-        </div>
-        <TextField
-          placeholder="Add your coupon here.."
-          variant="outlined"
-          className="coupon-input"
-        />
-        <Button variant="contained" className="apply-button">
-          Apply
-        </Button> */}
         <Typography variant="h6" className="total-amount">
-          Total Amount: ₹440.00
+          Total Amount: ₹{calculateTotal().toFixed(2)}
         </Typography>
-        <Button variant="contained" color="success" className="checkout-button">
+        <Button
+          variant="contained"
+          color="success"
+          className="checkout-button"
+          disabled={cartItems.length === 0}
+        >
           Checkout
         </Button>
       </div>

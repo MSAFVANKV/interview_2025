@@ -16,13 +16,16 @@ import { useDispatch, useSelector } from "react-redux";
 import useNavigateClicks from "../../hooks/navigate-clicks";
 import { logout } from "../../routers/api";
 import { logoutState } from "../../redux/userSide/action/authSlice";
+import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import { Badge } from "@mui/material";
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const dispatch = useDispatch();
-  const open = (anchorEl);
+  const open = anchorEl;
   const { handleClick: navigate } = useNavigateClicks();
-//   const { handleLogout } = useAuth();
+  //   const { handleLogout } = useAuth();
   const { user, isLogged } = useSelector((state) => state.auth);
+  const cartItems = useSelector((state) => state.cart.items);
 
   const handleClick = (event) => {
     setAnchorEl(event.currentTarget);
@@ -47,63 +50,66 @@ export default function AccountMenu() {
   return (
     <React.Fragment>
       <Box sx={{ display: "flex", alignItems: "center", textAlign: "center" }}>
-        {
-            isLogged && (
-                 <Tooltip title="Account settings">
-          <div className="">
-            <IconButton
-              onClick={handleClick}
-              size="small"
-              sx={{ ml: 2 }}
-              aria-controls={open ? "account-menu" : undefined}
-              aria-haspopup="true"
-              aria-expanded={open ? "true" : undefined}
-            >
-              <Avatar
-                sx={{
-                  width: 32,
-                  height: 32,
-                  textTransform: "capitalize",
-                  bgcolor: "black",
-                  margin: "auto",
-                }}
-              >
-                {user?.email.slice(0, 1)}
-              </Avatar>
-            </IconButton>
-          </div>
-        </Tooltip> 
-            )
-        }
-      
-        {/* =====  Notification ====== */}
-       
-          <>
-            <Tooltip title="My Notifications">
+        {isLogged && (
+          <Tooltip title="Account settings">
+            <div className="">
               <IconButton
-                onClick={() => handleCloseAndNavigate("/account/notification")}
+                onClick={handleClick}
                 size="small"
-                sx={{ ml: 0 }}
+                sx={{ ml: 2 }}
+                aria-controls={open ? "account-menu" : undefined}
+                aria-haspopup="true"
+                aria-expanded={open ? "true" : undefined}
               >
                 <Avatar
-                  sx={{ width: 32, height: 32, backgroundColor: "transparent" }}
+                  sx={{
+                    width: 32,
+                    height: 32,
+                    textTransform: "capitalize",
+                    bgcolor: "black",
+                    margin: "auto",
+                  }}
                 >
-                  {" "}
-                  <Icon
-                    icon={`ph:bell-light`}
-                    fontSize={25}
-                    className="text-black"
-                  />
+                  {user?.email.slice(0, 1)}
                 </Avatar>
               </IconButton>
-            </Tooltip>
+            </div>
+          </Tooltip>
+        )}
 
-            {/* =====  Cart ====== */}
-            <Tooltip title="My Cart">
-              <IconButton
-                onClick={() => handleCloseAndNavigate("/cart")}
-                size="small"
-                sx={{ ml: 0 }}
+        {/* =====  Notification ====== */}
+
+        <>
+          <Tooltip title="Super Admin">
+            <IconButton
+              onClick={() => handleCloseAndNavigate("/admin/products/add")}
+              size="small"
+              sx={{ ml: 0 }}
+            >
+              <Avatar
+                sx={{ width: 32, height: 32, backgroundColor: "transparent" }}
+              >
+                {" "}
+                {/* <Icon
+                  icon={`ph:bell-light`}
+                  fontSize={25}
+                  className="text-black"
+                /> */}
+                <SupervisorAccountIcon fontSize="medium"/>
+              </Avatar>
+            </IconButton>
+          </Tooltip>
+
+          {/* =====  Cart ====== */}
+          <Tooltip title="My Cart">
+            <IconButton
+              onClick={() => handleCloseAndNavigate("/cart")}
+              size="small"
+              sx={{ ml: 0 }}
+            >
+              <Badge
+                badgeContent={cartItems.length} // Display the number of items in the cart
+                color="secondary" // Badge color
               >
                 <Avatar
                   sx={{ width: 32, height: 32, backgroundColor: "transparent" }}
@@ -115,10 +121,10 @@ export default function AccountMenu() {
                     className="text-black"
                   />
                 </Avatar>
-              </IconButton>
-            </Tooltip>
-          </>
- 
+              </Badge>
+            </IconButton>
+          </Tooltip>
+        </>
       </Box>
       <Menu
         anchorEl={anchorEl}
@@ -155,7 +161,15 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "center", vertical: "top" }}
         anchorOrigin={{ horizontal: "center", vertical: "bottom" }}
       >
-        <MenuItem disabled sx={{ fontWeight: "bold", color: "#5F08B1", mb: 1,userSelect:"none" }}>
+        <MenuItem
+          disabled
+          sx={{
+            fontWeight: "bold",
+            color: "#5F08B1",
+            mb: 1,
+            userSelect: "none",
+          }}
+        >
           Hi, {user?.email.toUpperCase()}
         </MenuItem>
         {/* <Divider sx={{ my: 1 }} /> */}
@@ -235,8 +249,8 @@ export default function AccountMenu() {
             // logout();
             // handleLogout("/");
             handleCloseAndNavigate("/");
-            logout()
-            dispatch(logoutState())
+            logout();
+            dispatch(logoutState());
           }}
           sx={{
             justifyContent: "center",

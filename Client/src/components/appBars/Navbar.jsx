@@ -1,19 +1,18 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import { AppBar, Toolbar, IconButton, Drawer, List, ListItem, ListItemText } from '@mui/material';
 import MenuIcon from '@mui/icons-material/Menu';
 import '../../assets/css/navbar.scss';
 import SearchInput from '../search/Search_Input';
 import useNavigateClicks from '../../hooks/navigate-clicks';
-import { useSelector } from 'react-redux';
 
-const NavbarItems = [
-    {
-        id: 1,
-        name: "Home",
-        path:"/"
+// const NavbarItems = [
+//     {
+//         id: 1,
+//         name: "Home",
+//         path:"/"
 
-    }
-]
+//     }
+// ]
 
 function Navbar() {
   const [drawerOpen, setDrawerOpen] = useState(false);

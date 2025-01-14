@@ -2,7 +2,7 @@
 
 ## HOW TO RUN
 
-- npm run dev
+- npm start
 
 ## USED PACKAGES
 

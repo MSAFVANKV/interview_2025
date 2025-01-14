@@ -4,7 +4,7 @@ import bcrypt from "bcryptjs"; // Import bcrypt for password hashing
 import jwt from "jsonwebtoken"; // Import jsonwebtoken for token generation
 
 export const loginUser = asyncHandler(async (req, res) => {
-  console.log('sdasda');
+  // console.log('sdasda');
   
   try {
     const { email, password, username } = req.body; // Include username for new users
