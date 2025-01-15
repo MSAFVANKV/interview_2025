@@ -31,6 +31,7 @@ app.use(express.urlencoded({ extended: true }));
 const allowedOrigins = [
   "http://localhost:5173", // Frontend during development
   "http://localhost:5174",
+  "https://cybpress-frontent.onrender.com"
 
 ];
 
