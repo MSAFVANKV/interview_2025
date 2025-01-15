@@ -38,13 +38,14 @@ export const loginUser = asyncHandler(async (req, res) => {
         { expiresIn: "30d" }
       );
       res.cookie("us-tkn", token, {
-        httpOnly: false, // Set to true to prevent JavaScript access
-        domain: process.env.FRONT_DOMAIN4, // Adjusted to allow both frontend and backend to access the cookie
-        secure: process.env.NODE_ENV === "production", // Ensure this is only true in production with HTTPS
-         sameSite: "Strict", // Ensures cookie is sent only with requests from the same origin
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-        path: "/",
-      });
+  httpOnly: true,
+  domain: '.onrender.com', // Use root domain
+  secure: process.env.NODE_ENV === "production", // HTTPS in production
+  sameSite: "Strict", // Restrict cookie to same-origin requests
+  maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+  path: "/", // Allow cookie on all paths
+});
+
       
 
       res.setHeader("Authorization", `Bearer ${token}`);
@@ -70,13 +71,14 @@ export const loginUser = asyncHandler(async (req, res) => {
       
 
       res.cookie("us-tkn", token, {
-        httpOnly: false, // Set to true to prevent JavaScript access
-        domain: process.env.FRONT_DOMAIN4, // Adjusted to allow both frontend and backend to access the cookie
-        secure: process.env.NODE_ENV === "production", // Ensure this is only true in production with HTTPS
-         sameSite: "Strict", // Ensures cookie is sent only with requests from the same origin
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-        path: "/",
-      });
+  httpOnly: true,
+  domain: '.onrender.com', // Use root domain
+  secure: process.env.NODE_ENV === "production", // HTTPS in production
+  sameSite: "Strict", // Restrict cookie to same-origin requests
+  maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+  path: "/", // Allow cookie on all paths
+});
+
       
 
       res.setHeader("Authorization", `Bearer ${token}`);
