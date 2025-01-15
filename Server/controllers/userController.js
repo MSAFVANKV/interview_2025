@@ -39,7 +39,7 @@ export const loginUser = asyncHandler(async (req, res) => {
       );
       res.cookie("us-tkn", token, {
         httpOnly: true,
-        domain: "cybpress-frontent.onrender.com", // Use root domain
+        domain: "cybpress-backent.onrender.com", // Use root domain
         secure: process.env.NODE_ENV === "production", // HTTPS in production
         sameSite: "Strict", // Restrict cookie to same-origin requests
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
@@ -69,7 +69,7 @@ export const loginUser = asyncHandler(async (req, res) => {
 
       res.cookie("us-tkn", token, {
         httpOnly: true,
-        domain: "cybpress-frontent.onrender.com", // Use root domain
+        domain: "cybpress-backent.onrender.com", // Use root domain
         secure: process.env.NODE_ENV === "production", // HTTPS in production
         sameSite: "Strict", // Restrict cookie to same-origin requests
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
