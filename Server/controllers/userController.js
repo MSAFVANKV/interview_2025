@@ -38,7 +38,7 @@ export const loginUser = asyncHandler(async (req, res) => {
         { expiresIn: "30d" }
       );
       res.cookie("us-tkn", token, {
-        httpOnly: true, // Set to true to prevent JavaScript access
+        httpOnly: false, // Set to true to prevent JavaScript access
         domain: "cybpress-backent.onrender.com", // Corrected domain (removed trailing slash)
         secure: process.env.NODE_ENV === "production",
         sameSite: "Strict",
@@ -66,7 +66,7 @@ export const loginUser = asyncHandler(async (req, res) => {
       );
 
       res.cookie("us-tkn", token, {
-        httpOnly: true, // Set to true to prevent JavaScript access
+        httpOnly: false, // Set to true to prevent JavaScript access
         domain: "cybpress-backent.onrender.com", // Corrected domain (removed trailing slash)
         secure: process.env.NODE_ENV === "production",
         sameSite: "Strict",
@@ -131,7 +131,7 @@ export const logoutUser = asyncHandler(async (req, res) => {
   try {
     // Clear the token cookie
     res.clearCookie("us-tkn", {
-      httpOnly: true,
+      httpOnly: false,
       domain:"cybpress-backent.onrender.com",
       secure: process.env.NODE_ENV === "production",
       sameSite: "Strict",
