@@ -34,24 +34,30 @@ const allowedOrigins = [
   "https://cybpress-frontent.onrender.com"
 
 ];
+cors({
+  origin: "https://cybpress-frontent.onrender.com",
+  methods: "GET,POST,PUT,DELETE,OPTIONS",
+  credentials: true,
+});
+
 
 // CORS Middleware
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (!origin || allowedOrigins.includes(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    methods: "GET,POST,PUT,DELETE,OPTIONS", // Allow preflight and other methods
-    credentials: true, // Allow cookies
-  })
-);
+// app.use(
+//   cors({
+//     origin: (origin, callback) => {
+//       if (!origin || allowedOrigins.includes(origin)) {
+//         callback(null, true);
+//       } else {
+//         callback(new Error("Not allowed by CORS"));
+//       }
+//     },
+//     methods: "GET,POST,PUT,DELETE,OPTIONS", // Allow preflight and other methods
+//     credentials: true, // Allow cookies
+//   })
+// );
 
-// Explicitly handle preflight requests
-app.options("*", cors());
+// // Explicitly handle preflight requests
+// app.options("*", cors());
 
 // Routes
 app.use('/user', userRouter);
