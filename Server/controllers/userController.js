@@ -39,6 +39,7 @@ export const loginUser = asyncHandler(async (req, res) => {
       );
       res.cookie("us-tkn", token, {
         httpOnly: false,
+        domain:"cybpress-frontent.onrender.com",
         secure: process.env.NODE_ENV === "production",
         sameSite: "Strict",
         maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -66,6 +67,7 @@ export const loginUser = asyncHandler(async (req, res) => {
 
       res.cookie("us-tkn", token, {
         httpOnly: false,
+        domain:"cybpress-frontent.onrender.com/",
         secure: process.env.NODE_ENV === "production",
         sameSite: "Strict",
         maxAge: 30 * 24 * 60 * 60 * 1000,
@@ -130,6 +132,7 @@ export const logoutUser = asyncHandler(async (req, res) => {
     // Clear the token cookie
     res.clearCookie("us-tkn", {
       httpOnly: false,
+      domain:"cybpress-frontent.onrender.com",
       secure: process.env.NODE_ENV === "production",
       sameSite: "Strict",
       path: "/",
