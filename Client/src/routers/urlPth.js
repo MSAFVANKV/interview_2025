@@ -1,4 +1,6 @@
-export const MAIN_URL = `http://localhost:3000`
+// export const MAIN_URL = `http://localhost:3000`
+export const MAIN_URL = `https://cybpress-backent.onrender.com`
+
 
 export const LOGIN_USER_URL = `user/login`
 export const FETCH_USER_DATA = `user/user-data`

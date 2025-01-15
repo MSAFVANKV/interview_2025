@@ -2,7 +2,7 @@ import axios from 'axios';
 import { FETCH_USER_DATA, LOGIN_USER_URL, USER_LOGOUT } from './urlPth';
 
 const API = axios.create({
-  baseURL: 'http://localhost:3000/',
+  baseURL: 'https://cybpress-backent.onrender.com/',
   withCredentials: true, 
 });
 
