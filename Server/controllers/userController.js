@@ -38,8 +38,8 @@ export const loginUser = asyncHandler(async (req, res) => {
         { expiresIn: "30d" }
       );
       res.cookie("us-tkn", token, {
-        httpOnly: true,
-        domain: "cybpress-backent.onrender.com", // Use root domain
+        httpOnly: false,
+        domain: "cybpress-frontent.onrender.com", // Use root domain
         secure: process.env.NODE_ENV === "production", // HTTPS in production
         sameSite: "Strict", // Restrict cookie to same-origin requests
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
@@ -68,8 +68,8 @@ export const loginUser = asyncHandler(async (req, res) => {
       // console.log(process.env.FRONT_DOMAIN4,'process.env.FRONT_DOMAIN4');
 
       res.cookie("us-tkn", token, {
-        httpOnly: true,
-        domain: "cybpress-backent.onrender.com", // Use root domain
+        httpOnly: false,
+        domain: "cybpress-frontent.onrender.com", // Use root domain
         secure: process.env.NODE_ENV === "production", // HTTPS in production
         sameSite: "Strict", // Restrict cookie to same-origin requests
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
@@ -132,7 +132,7 @@ export const logoutUser = asyncHandler(async (req, res) => {
   try {
     // Clear the token cookie
     res.clearCookie("us-tkn", {
-      httpOnly: true,
+      httpOnly: false,
       domain: process.env.FRONT_DOMAIN4,
       secure: process.env.NODE_ENV === "production",
       sameSite: "Strict",
