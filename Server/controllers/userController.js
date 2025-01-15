@@ -41,7 +41,7 @@ export const loginUser = asyncHandler(async (req, res) => {
         httpOnly: true,
         domain: ".onrender.com", // Use root domain
         secure: process.env.NODE_ENV === "production", // HTTPS in production
-        sameSite: "None", // Restrict cookie to same-origin requests
+        sameSite: "Strict", // Restrict cookie to same-origin requests
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
         path: "/", // Allow cookie on all paths
       });
@@ -71,7 +71,7 @@ export const loginUser = asyncHandler(async (req, res) => {
         httpOnly: true,
         domain: ".onrender.com", // Use root domain
         secure: process.env.NODE_ENV === "production", // HTTPS in production
-        sameSite: "None", // Restrict cookie to same-origin requests
+        sameSite: "Strict", // Restrict cookie to same-origin requests
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
         path: "/", // Allow cookie on all paths
       });
@@ -135,7 +135,7 @@ export const logoutUser = asyncHandler(async (req, res) => {
       httpOnly: true,
       domain: process.env.FRONT_DOMAIN4,
       secure: process.env.NODE_ENV === "production",
-      sameSite: "None",
+      sameSite: "Strict",
       path: "/",
     });
 
