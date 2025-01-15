@@ -63,7 +63,7 @@ function LoginPage() {
               if (response.status === 200 || response.status === 201) {
                 dispatch(setUserData(values)); // Dispatch login action
                 // const tokenExpirationDate = new Date((JSON.parse(atob(token.split('.')[1]))).exp * 1000); 
-                document.cookie = `us-tkn=${response.data.token};  path=/; SameSite=Strict; Secure; HttpOnly`; 
+                // document.cookie = `us-tkn=${response.data.token};  path=/; SameSite=Strict; Secure; HttpOnly`; 
                 navigate('/')
                 makeToast(`${response.data.message}`)
               }
