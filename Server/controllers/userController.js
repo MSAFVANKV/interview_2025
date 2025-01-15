@@ -39,7 +39,7 @@ export const loginUser = asyncHandler(async (req, res) => {
       );
       res.cookie("us-tkn", token, {
         httpOnly: true, // Set to true to prevent JavaScript access
-        domain: ".onrender.com", // Adjusted to allow both frontend and backend to access the cookie
+        domain: "cybpress-backent.onrender.com", // Adjusted to allow both frontend and backend to access the cookie
         secure: process.env.NODE_ENV === "production", // Ensure this is only true in production with HTTPS
         sameSite: "Strict", // Ensures cookie is sent only with requests from the same origin
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
@@ -68,7 +68,7 @@ export const loginUser = asyncHandler(async (req, res) => {
 
       res.cookie("us-tkn", token, {
         httpOnly: true, // Set to true to prevent JavaScript access
-        domain: ".onrender.com", // Adjusted to allow both frontend and backend to access the cookie
+        domain: "cybpress-backent.onrender.com", // Adjusted to allow both frontend and backend to access the cookie
         secure: process.env.NODE_ENV === "production", // Ensure this is only true in production with HTTPS
         sameSite: "Strict", // Ensures cookie is sent only with requests from the same origin
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
@@ -134,7 +134,7 @@ export const logoutUser = asyncHandler(async (req, res) => {
     // Clear the token cookie
     res.clearCookie("us-tkn", {
       httpOnly: true,
-      domain:".onrender.com",
+      domain:"cybpress-backent.onrender.com",
       secure: process.env.NODE_ENV === "production",
       sameSite: "Strict",
       path: "/",
