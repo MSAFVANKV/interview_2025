@@ -1,5 +1,6 @@
 import axios from 'axios';
 import { FETCH_USER_DATA, LOGIN_USER_URL, USER_LOGOUT } from './urlPth';
+import Cookies from "js-cookie"; 
 
 const API = axios.create({
   // baseURL: 'http://localhost:3000/',
@@ -7,6 +8,19 @@ const API = axios.create({
 
   withCredentials: true, 
 });
+
+API.interceptors.request.use(
+  (config) => {
+    const token = Cookies.get("us-tkn"); // Get the 'us-tkn' token using js-cookie
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export const Login_Api = async (data) => 
   await API.post(LOGIN_USER_URL,data, { withCredentials: true });

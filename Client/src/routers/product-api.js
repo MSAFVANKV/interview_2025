@@ -1,11 +1,24 @@
 import axios from "axios";
 import { BANNERS_ADD, BANNERS_FETCH, PRODUCT_ADD, SINGLE_PRODUCTS, UPDATE_PRODUCTS } from "./urlPth";
-
+import Cookies from "js-cookie"; 
 const API = axios.create({
   // baseURL: 'http://localhost:3000/',
   baseURL: 'https://cybpress-backent.onrender.com/',
   withCredentials: true,
 });
+
+API.interceptors.request.use(
+  (config) => {
+    const token = Cookies.get("us-tkn"); // Get the 'us-tkn' token using js-cookie
+    if (token) {
+      config.headers["Authorization"] = `Bearer ${token}`;
+    }
+    return config;
+  },
+  (error) => {
+    return Promise.reject(error);
+  }
+);
 
 export const Create_Product_Api = async (formData) =>
   await API.post(
