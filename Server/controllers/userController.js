@@ -39,7 +39,7 @@ export const loginUser = asyncHandler(async (req, res) => {
       );
       res.cookie("us-tkn", token, {
         httpOnly: false, // Set to true to prevent JavaScript access
-        domain: "cybpress-backent.onrender.com", // Corrected domain (removed trailing slash)
+        domain: ".onrender.com" , // Corrected domain (removed trailing slash)
         secure: process.env.NODE_ENV === "production",
         sameSite: "Strict",
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
@@ -67,7 +67,7 @@ export const loginUser = asyncHandler(async (req, res) => {
 
       res.cookie("us-tkn", token, {
         httpOnly: false, // Set to true to prevent JavaScript access
-        domain: "cybpress-backent.onrender.com", // Corrected domain (removed trailing slash)
+        domain: ".onrender.com" , // Corrected domain (removed trailing slash)
         secure: process.env.NODE_ENV === "production",
         sameSite: "Strict",
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
