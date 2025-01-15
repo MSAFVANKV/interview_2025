@@ -10,7 +10,7 @@ import { setUserData } from "../../../../redux/userSide/action/authSlice";
 import { Login_Api } from "../../../../routers/api";
 import { useNavigate } from "react-router";
 import { makeToast } from "../../../../lib/helper";
-import Cookies from "js-cookie"; 
+// import Cookies from "js-cookie"; 
 function LoginPage() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -64,12 +64,12 @@ function LoginPage() {
                 dispatch(setUserData(values)); // Dispatch login action
                 // const tokenExpirationDate = new Date((JSON.parse(atob(token.split('.')[1]))).exp * 1000); 
                 // document.cookie = `us-tkn=${response.data.token};  path=/; SameSite=Strict; Secure; HttpOnly`; 
-                Cookies.set("us-tkn", response.data.token, {
-                  expires: 30, // Cookie will expire in 30 days
-                  path: "/",
-                  sameSite: "Lax", // Set to Lax for cross-origin requests
-                  secure: import.meta.env.MODE === "development", // Set secure flag in production
-                });
+                // Cookies.set("us-tkn", response.data.token, {
+                //   expires: 30, // Cookie will expire in 30 days
+                //   path: "/",
+                //   sameSite: "Lax", // Set to Lax for cross-origin requests
+                //   secure: import.meta.env.MODE === "development", // Set secure flag in production
+                // });
                 navigate('/')
                 makeToast(`${response.data.message}`)
               }
