@@ -15,10 +15,10 @@ export const fetchSingleProduct = createAsyncThunk(
   "product/fetchSingleProduct",
   async (slugId, { rejectWithValue }) => {
     try {
-      console.log(slugId);
+      // console.log(slugId);
       
       const response = await Fetch_Single_Product_Api(slugId);
-      console.log(response);
+      // console.log(response);
       return response.data;
 
     } catch (error) {

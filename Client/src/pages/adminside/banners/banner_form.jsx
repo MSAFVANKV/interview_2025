@@ -1,4 +1,4 @@
-import React from 'react'
+
 import { Box, Button } from "@mui/material";
 import { Form, Formik } from "formik";
 import { Create_Banners_Api } from '../../../routers/product-api';
@@ -29,7 +29,7 @@ function BannerForm({ fetchBaners }) {
     <Formik
       initialValues={initialValues}
       onSubmit={async (values, { resetForm }) => {
-        console.log("Form submitted", values);
+        // console.log("Form submitted", values);
 
         const formData = new FormData();
         values.banner.forEach((file) => {
@@ -38,7 +38,7 @@ function BannerForm({ fetchBaners }) {
 
         try {
           const response = await Create_Banners_Api(formData);
-          console.log(response);
+          // console.log(response);
           
           if (response.status === 200) {
             makeToast(`${response.data.message}`);

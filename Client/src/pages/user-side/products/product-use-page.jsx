@@ -6,7 +6,7 @@ import { Typography, Box, Button } from "@mui/material";
 import Grid from "@mui/material/Grid2";
 import ProductCardImg from "./product_card_img";
 import "./userProd.scss";
-import { makeToast, makeToastError } from "../../../lib/helper";
+import { makeToast, makeToastError, makeToastWarning } from "../../../lib/helper";
 import { addToCart } from "../../../redux/userSide/action/cartSlice";
 import { fetchUserDetails } from "../../../redux/userSide/action/authSlice";
 
@@ -20,7 +20,7 @@ function ProductUsePage() {
   const [selectedImage, setSelectedImage] = useState(null);
   const [activeIndex, setActiveIndex] = useState(0);
 
-  console.log(selectedImage,'selectedImage');
+  // console.log(selectedImage,'selectedImage');
   
 
   useEffect(() => {

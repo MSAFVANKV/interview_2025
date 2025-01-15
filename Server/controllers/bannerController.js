@@ -41,7 +41,7 @@ import { Banner } from '../modals/benners.js';
  
 // });
 export const createBanner = asyncHandler(async (req, res) => {
-  console.log('banner controller');
+//   console.log('banner controller');
   
   const basePath = `${req.secure ? "https" : "http"}://${req.get("host")}/`;
 
@@ -81,6 +81,17 @@ export const createBanner = asyncHandler(async (req, res) => {
 
 // Get Banners
 export const getBanners = asyncHandler(async (req, res) => {
-  const banners = await Banner.find();
-  res.status(200).json(banners);
+  
+  try {
+    const banners = await Banner.find();
+
+    if (!banners) {
+      return res.status(204).json({ message: "No banners found" });
+    }
+     res.status(200).json(banners);
+  } catch (error) {
+   return res.status(500).json({ message: "Server error", error });
+    
+  }
+ 
 });

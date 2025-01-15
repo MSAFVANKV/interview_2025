@@ -17,7 +17,7 @@ export const fetchUserDetails = createAsyncThunk(
   async (_, { rejectWithValue }) => {
     try {
       const response = await Fetch_User();
-      console.log(response);
+      // console.log(response);
       
       if (response.data.success === true) {
         return response.data.user;

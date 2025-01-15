@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import  { useEffect, useState } from 'react'
 import { styled } from "@mui/material";
 import Slider from "react-slick";
 import { Icon } from "@iconify/react/dist/iconify.js";
@@ -42,7 +42,7 @@ function HomeSlider1() {
         const res = await Fetch_Banners_Api();
         if (res.status === 200) {
           const filterBanner = res.data.find((data)=>{return data.banner})
-          console.log(filterBanner);
+          // console.log(filterBanner);
           
           setBanners(filterBanner.banner);
         }
@@ -50,14 +50,7 @@ function HomeSlider1() {
         console.log(error);
       }
     };
-    const images = [
-        { src: "https://placehold.co/800x400", alt: "Banner 1" },
-        { src: "https://placehold.co/800x400", alt: "Banner 2" },
-        { src: "https://placehold.co/800x400", alt: "Banner 3" },
-        { src: "https://placehold.co/800x400", alt: "Banner 4" },
-        { src: "https://placehold.co/800x400", alt: "Banner 5" },
-        { src: "https://placehold.co/800x400", alt: "Banner 6" },
-      ];
+
     
       const settings = {
         dots: true,

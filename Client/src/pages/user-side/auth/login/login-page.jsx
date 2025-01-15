@@ -1,10 +1,9 @@
-import React, { useState } from "react";
+
 import { useDispatch } from "react-redux";
 // import { login } from '../../redux/actions/authActions';
 import { Button, TextField, Typography, Container, Box } from "@mui/material";
-import { ErrorMessage, Field, Form, Formik, useFormik } from "formik";
+import { ErrorMessage, Field, Form, Formik } from "formik";
 import * as Yup from "yup";
-import Grid from "@mui/material/Grid2";
 
 import "./LoginPage.scss";
 import { setUserData } from "../../../../redux/userSide/action/authSlice";
@@ -56,10 +55,10 @@ function LoginPage() {
           initialValues={{ email: "", password: "" }}
           validationSchema={validationSchema}
           onSubmit={async (values) => {
-            console.log(values);
+            // console.log(values);
             try {
               const response = await Login_Api({ email: values.email, password: values.password })
-              console.log(response, 'response');
+              // console.log(response, 'response');
 
               if (response.status === 200 || response.status === 201) {
                 dispatch(setUserData(values)); // Dispatch login action
@@ -68,6 +67,8 @@ function LoginPage() {
               }
             } catch (error) {
               makeToast(`server error`)
+              console.error(error);
+              
 
             }
             dispatch(setUserData(values)); // Dispatch login action
