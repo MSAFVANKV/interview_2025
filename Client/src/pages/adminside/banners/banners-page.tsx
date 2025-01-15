@@ -13,7 +13,12 @@ function BannersPage() {
     try {
       const res = await Fetch_Banners_Api();
       if (res.status === 200) {
-        setBanners(res.data);
+        const filterBanner = res.data.find((data) => {
+          return data.banner;
+        });
+        // console.log(filterBanner);
+
+        setBanners(filterBanner.banner);
       }
     } catch (error) {
       console.log(error);
@@ -43,29 +48,11 @@ function BannersPage() {
         </div>
         {/* Banner Display */}
         <div className="">
-          {banners.length > 0 ? (
-            banners.map((banner, bannerIndex) => (
-              <Box
-               my="1rem"
-                display="flex"
-                flexWrap="wrap"
-                gap="8px"
-                key={bannerIndex} // Adding key to avoid warnings
-              >
-                {banner?.banner?.map((img, index) => (
-                  <img
-                    src={img} // Assuming img is the correct URL
-                    alt={`Banner ${index}`}
-                    key={index} // Adding key for each image
-                    height={50}
-                    width={50}
-                  />
-                ))}
-              </Box>
-            ))
-          ) : (
-            <p>No banners available</p>
-          )}
+          {banners.map((image, index) => (
+            <div key={index}>
+              <img src={image} alt={"as"} className="slider-image" />
+            </div>
+          ))}
         </div>
       </div>
     </div>
