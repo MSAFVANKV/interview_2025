@@ -37,22 +37,23 @@ export const loginUser = asyncHandler(async (req, res) => {
         process.env.JWT_SECRET_USER,
         { expiresIn: "30d" }
       );
-      res.cookie("us-tkn", token, {
-        httpOnly: false, // Set to true to prevent JavaScript access
-        domain: process.env.FRONT_DOMAIN2, // Adjusted to allow both frontend and backend to access the cookie
-        secure: process.env.NODE_ENV === "production", // Ensure this is only true in production with HTTPS
-         sameSite: "Strict", // Ensures cookie is sent only with requests from the same origin
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-        path: "/",
-      });
+      // res.cookie("us-tkn", token, {
+      //   httpOnly: false, // Set to true to prevent JavaScript access
+      //   domain: process.env.FRONT_DOMAIN2, // Adjusted to allow both frontend and backend to access the cookie
+      //   secure: process.env.NODE_ENV === "production", // Ensure this is only true in production with HTTPS
+      //    sameSite: "Strict", // Ensures cookie is sent only with requests from the same origin
+      //   maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      //   path: "/",
+      // });
       
 
-      res.setHeader("Authorization", `Bearer ${token}`);
+      // res.setHeader("Authorization", `Bearer ${token}`);
 
       return res.status(201).json({
         success: true,
         message: "User created successfully",
         user,
+        token
       });
     }
 
@@ -66,14 +67,14 @@ export const loginUser = asyncHandler(async (req, res) => {
         { expiresIn: "30d" }
       );
 
-      res.cookie("us-tkn", token, {
-        httpOnly: false, // Set to true to prevent JavaScript access
-        domain: process.env.FRONT_DOMAIN2, // Adjusted to allow both frontend and backend to access the cookie
-        secure: process.env.NODE_ENV === "production", // Ensure this is only true in production with HTTPS
-         sameSite: "Strict", // Ensures cookie is sent only with requests from the same origin
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-        path: "/",
-      });
+      // res.cookie("us-tkn", token, {
+      //   httpOnly: false, // Set to true to prevent JavaScript access
+      //   domain: process.env.FRONT_DOMAIN2, // Adjusted to allow both frontend and backend to access the cookie
+      //   secure: process.env.NODE_ENV === "production", // Ensure this is only true in production with HTTPS
+      //    sameSite: "Strict", // Ensures cookie is sent only with requests from the same origin
+      //   maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+      //   path: "/",
+      // });
       
 
       res.setHeader("Authorization", `Bearer ${token}`);
