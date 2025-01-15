@@ -38,12 +38,11 @@ export const loginUser = asyncHandler(async (req, res) => {
         { expiresIn: "30d" }
       );
       res.cookie("us-tkn", token, {
-       
-        secure: process.env.NODE_ENV === "production", // Ensure HTTPS in production
-        sameSite: "Strict", // Use 'Strict' for CSRF protection and compatibility
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-        path: "/", // Apply to all paths
-        // domain: ".cybpress-frontent.onrender.com", // Match backend domain
+        secure: process.env.NODE_ENV === "production",
+        domain: ".onrender.com",
+        sameSite: "Strict",
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        path: "/",
       });
 
       res.setHeader("Authorization", `Bearer ${token}`);
@@ -68,12 +67,11 @@ export const loginUser = asyncHandler(async (req, res) => {
       // console.log(process.env.FRONT_DOMAIN4,'process.env.FRONT_DOMAIN4');
 
       res.cookie("us-tkn", token, {
-       
-        secure: process.env.NODE_ENV === "production", // Ensure HTTPS in production
-        sameSite: "Strict", // Use 'Strict' for CSRF protection and compatibility
-        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-        path: "/", // Apply to all paths
-        // domain: ".cybpress-frontent.onrender.com", // Match backend domain
+        secure: process.env.NODE_ENV === "production",
+        domain: ".onrender.com",
+        sameSite: "Strict",
+        maxAge: 30 * 24 * 60 * 60 * 1000,
+        path: "/",
       });
 
       res.setHeader("Authorization", `Bearer ${token}`);
@@ -132,7 +130,6 @@ export const logoutUser = asyncHandler(async (req, res) => {
   try {
     // Clear the token cookie
     res.clearCookie("us-tkn", {
-     
       domain: process.env.FRONT_DOMAIN4,
       secure: process.env.NODE_ENV === "production",
       sameSite: "Strict",
