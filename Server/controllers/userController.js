@@ -43,7 +43,7 @@ export const loginUser = asyncHandler(async (req, res) => {
         sameSite: "Lax", // Use 'Lax' for CSRF protection and compatibility
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
         path: "/", // Apply to all paths
-        domain: "cybpress-frontent.onrender.com", // Match backend domain
+        domain: "cybpress-backent.onrender.com", // Match backend domain
       });
 
       res.setHeader("Authorization", `Bearer ${token}`);
@@ -73,7 +73,7 @@ export const loginUser = asyncHandler(async (req, res) => {
         sameSite: "Lax", // Use 'Lax' for CSRF protection and compatibility
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
         path: "/", // Apply to all paths
-        domain: "cybpress-frontent.onrender.com", // Match backend domain
+        domain: "cybpress-backent.onrender.com", // Match backend domain
       });
 
       res.setHeader("Authorization", `Bearer ${token}`);
