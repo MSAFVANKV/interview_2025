@@ -2,7 +2,8 @@ import axios from "axios";
 import { BANNERS_ADD, BANNERS_FETCH, PRODUCT_ADD, SINGLE_PRODUCTS, UPDATE_PRODUCTS } from "./urlPth";
 
 const API = axios.create({
-  baseURL: "https://cybpress-backent.onrender.com/",
+  // baseURL: 'http://localhost:3000/',
+  baseURL: 'https://cybpress-backent.onrender.com/',
   withCredentials: true,
 });
 
