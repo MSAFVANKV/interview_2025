@@ -58,12 +58,12 @@ function LoginPage() {
             // console.log(values);
             try {
               const response = await Login_Api({ email: values.email, password: values.password })
-              console.log(response, 'response');
+              // console.log(response, 'response');
 
               if (response.status === 200 || response.status === 201) {
                 dispatch(setUserData(values)); // Dispatch login action
                 // const tokenExpirationDate = new Date((JSON.parse(atob(token.split('.')[1]))).exp * 1000); 
-                document.cookie = `us-tkn=${response.data.token};  path=/; SameSite=Strict; Secure; HttpOnly`; 
+                // document.cookie = `us-tkn=${response.data.token};  path=/; SameSite=Strict; Secure; HttpOnly`; 
                 navigate('/')
                 makeToast(`${response.data.message}`)
               }
