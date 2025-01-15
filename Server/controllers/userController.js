@@ -39,11 +39,11 @@ export const loginUser = asyncHandler(async (req, res) => {
       );
       res.cookie("us-tkn", token, {
         httpOnly: true,
-        domain: "cybpress-backent.onrender.com", // Use root domain
-        secure: process.env.NODE_ENV === "production", // HTTPS in production
-        sameSite: "Strict", // Restrict cookie to same-origin requests
+        secure: process.env.NODE_ENV === "production", // Ensure HTTPS in production
+        sameSite: "Lax", // Use 'Lax' for CSRF protection and compatibility
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-        path: "/", // Allow cookie on all paths
+        path: "/", // Apply to all paths
+        domain: "cybpress-frontent.onrender.com", // Match backend domain
       });
 
       res.setHeader("Authorization", `Bearer ${token}`);
@@ -69,11 +69,11 @@ export const loginUser = asyncHandler(async (req, res) => {
 
       res.cookie("us-tkn", token, {
         httpOnly: true,
-        domain: "cybpress-backent.onrender.com", // Use root domain
-        secure: process.env.NODE_ENV === "production", // HTTPS in production
-        sameSite: "Strict", // Restrict cookie to same-origin requests
+        secure: process.env.NODE_ENV === "production", // Ensure HTTPS in production
+        sameSite: "Lax", // Use 'Lax' for CSRF protection and compatibility
         maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-        path: "/", // Allow cookie on all paths
+        path: "/", // Apply to all paths
+        domain: "cybpress-frontent.onrender.com", // Match backend domain
       });
 
       res.setHeader("Authorization", `Bearer ${token}`);
