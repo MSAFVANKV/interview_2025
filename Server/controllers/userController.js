@@ -5,12 +5,12 @@ import jwt from "jsonwebtoken"; // Import jsonwebtoken for token generation
 
 export const loginUser = asyncHandler(async (req, res) => {
   // console.log('sdasda');
-  
+
   try {
     const { email, password, username } = req.body; // Include username for new users
 
     // Validate input
-    if (!email || !password ) {
+    if (!email || !password) {
       return res.status(400).json({
         success: false,
         message: "Please fill all the inputs.",
@@ -38,15 +38,13 @@ export const loginUser = asyncHandler(async (req, res) => {
         { expiresIn: "30d" }
       );
       res.cookie("us-tkn", token, {
-  httpOnly: true,
-  domain: '.onrender.com', // Use root domain
-  secure: process.env.NODE_ENV === "production", // HTTPS in production
-  sameSite: "Strict", // Restrict cookie to same-origin requests
-  maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-  path: "/", // Allow cookie on all paths
-});
-
-      
+        httpOnly: true,
+        domain: ".onrender.com", // Use root domain
+        secure: process.env.NODE_ENV === "production", // HTTPS in production
+        sameSite: "None", // Restrict cookie to same-origin requests
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+        path: "/", // Allow cookie on all paths
+      });
 
       res.setHeader("Authorization", `Bearer ${token}`);
 
@@ -54,7 +52,7 @@ export const loginUser = asyncHandler(async (req, res) => {
         success: true,
         message: "User created successfully",
         user,
-        token
+        token,
       });
     }
 
@@ -68,18 +66,15 @@ export const loginUser = asyncHandler(async (req, res) => {
         { expiresIn: "30d" }
       );
       // console.log(process.env.FRONT_DOMAIN4,'process.env.FRONT_DOMAIN4');
-      
 
       res.cookie("us-tkn", token, {
-  httpOnly: true,
-  domain: '.onrender.com', // Use root domain
-  secure: process.env.NODE_ENV === "production", // HTTPS in production
-  sameSite: "Strict", // Restrict cookie to same-origin requests
-  maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
-  path: "/", // Allow cookie on all paths
-});
-
-      
+        httpOnly: true,
+        domain: ".onrender.com", // Use root domain
+        secure: process.env.NODE_ENV === "production", // HTTPS in production
+        sameSite: "None", // Restrict cookie to same-origin requests
+        maxAge: 30 * 24 * 60 * 60 * 1000, // 30 days
+        path: "/", // Allow cookie on all paths
+      });
 
       res.setHeader("Authorization", `Bearer ${token}`);
 
@@ -97,7 +92,7 @@ export const loginUser = asyncHandler(async (req, res) => {
     }
   } catch (error) {
     console.log(error);
-    
+
     return res.status(500).json({
       success: false,
       message: "Server error",
@@ -105,7 +100,6 @@ export const loginUser = asyncHandler(async (req, res) => {
     });
   }
 });
-
 
 export const getUserData = asyncHandler(async (req, res) => {
   try {
@@ -133,16 +127,15 @@ export const getUserData = asyncHandler(async (req, res) => {
   }
 });
 
-
 // ==== logut function ===
 export const logoutUser = asyncHandler(async (req, res) => {
   try {
     // Clear the token cookie
     res.clearCookie("us-tkn", {
       httpOnly: true,
-      domain:process.env.FRONT_DOMAIN4,
+      domain: process.env.FRONT_DOMAIN4,
       secure: process.env.NODE_ENV === "production",
-       sameSite: "Strict",
+      sameSite: "None",
       path: "/",
     });
 
