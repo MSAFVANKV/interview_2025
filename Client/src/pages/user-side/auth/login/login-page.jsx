@@ -86,6 +86,7 @@ function LoginPage() {
                 sx={{
                   display: "flex",
                   flexDirection: "column",
+                  width: "250px",
                 }}
               >
                 <Field
@@ -94,11 +95,18 @@ function LoginPage() {
                   value={values.email}
                   type="email"
                   as={TextField}
-                  placeholder="enter email"
+                  style={{
+                    padding:"px",
+                    width: "100%",
+                  }}
+                  placeholder="Enter email"
                 />
                 <ErrorMessage name="email" component={"span"}
                   style={{
                     color: "red",
+                    fontSize:"0.9rem",
+                    fontFamily:"Helvetica",
+                    marginTop:"5px"
                   }}
                 />
               </Box>
@@ -107,6 +115,7 @@ function LoginPage() {
                 sx={{
                   display: "flex",
                   flexDirection: "column",
+                  width: "250px",
                 }}
               >
                 <Field
@@ -115,21 +124,29 @@ function LoginPage() {
                   type="password"
                   value={values.password}
                   as={TextField}
-                  placeholder="enter password"
+                  placeholder="Enter password"
                 />
                 <ErrorMessage
                   name="password"
                   component={"span"}
                   style={{
                     color: "red",
+                    fontSize:"0.9rem",
+                    fontFamily:"Helvetica",
+                    marginTop:"5px"
                   }}
                 />
               </Box>
 
               <Button
                 type="submit"
+              
+                variant="contained"
+                
                 sx={{
+                  bgcolor:"#5F08B1",
                   width: "100%",
+                  color:"white"
                 }}
               >
                 Login
