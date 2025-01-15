@@ -166,7 +166,7 @@ export default function NavbarDrawer() {
       >
         <DrawerHeader className="">
           {/* <Logo /> */}
-          <img src="/public/img/logo.webp" alt="" height={30} width={30}
+          <img src="/img/logo.webp" alt="" height={30} width={30}
           style={{
             borderRadius:"50%",
           }}

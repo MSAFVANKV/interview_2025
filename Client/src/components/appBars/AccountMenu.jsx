@@ -14,10 +14,12 @@ import ShoppingBagOutlinedIcon from "@mui/icons-material/ShoppingBagOutlined";
 import { Icon } from "@iconify/react/dist/iconify.js";
 import { useDispatch, useSelector } from "react-redux";
 import useNavigateClicks from "../../hooks/navigate-clicks";
-import { logout } from "../../routers/api";
+// import { logout } from "../../routers/api";
 import { logoutState } from "../../redux/userSide/action/authSlice";
-import SupervisorAccountIcon from '@mui/icons-material/SupervisorAccount';
+import SupervisorAccountIcon from "@mui/icons-material/SupervisorAccount";
 import { Badge } from "@mui/material";
+import Cookies from "js-cookie";
+
 export default function AccountMenu() {
   const [anchorEl, setAnchorEl] = React.useState(null);
   const dispatch = useDispatch();
@@ -39,13 +41,14 @@ export default function AccountMenu() {
     navigate(to);
   };
 
-  // const logout = () => {
-  //   Cookies.remove("us_b2b_tkn");
-  //   window.location.reload();
-  //   Cookies.remove("us_b2b_kyc");
+  const logout = () => {
+    Cookies.remove("us_tkn");
+    dispatch(logoutState());
+    // window.location.reload();
+    // Cookies.remove("us_b2b_kyc");
 
-  //   navigate("/");
-  // };
+    navigate("/");
+  };
 
   return (
     <React.Fragment>
@@ -95,7 +98,7 @@ export default function AccountMenu() {
                   fontSize={25}
                   className="text-black"
                 /> */}
-                <SupervisorAccountIcon fontSize="medium"/>
+                <SupervisorAccountIcon fontSize="medium" />
               </Avatar>
             </IconButton>
           </Tooltip>
@@ -252,7 +255,6 @@ export default function AccountMenu() {
             // handleLogout("/");
             handleCloseAndNavigate("/");
             logout();
-            dispatch(logoutState());
           }}
           sx={{
             justifyContent: "center",
