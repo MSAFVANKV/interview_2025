@@ -16,6 +16,8 @@ export const SINGLE_PRODUCTS = `/product/getSingleProduct`;
 // ====== banners =====
 export const BANNERS_ADD = `/banners/add-banner`;
 export const BANNERS_FETCH = `/banners/get-banners`;
+export const BANNERS_DELETE = `/banners/delete-banners`;
+
 
 
 

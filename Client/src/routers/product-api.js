@@ -1,5 +1,5 @@
 import axios from "axios";
-import { BANNERS_ADD, BANNERS_FETCH, PRODUCT_ADD, SINGLE_PRODUCTS, UPDATE_PRODUCTS } from "./urlPth";
+import { BANNERS_ADD, BANNERS_DELETE, BANNERS_FETCH, PRODUCT_ADD, SINGLE_PRODUCTS, UPDATE_PRODUCTS } from "./urlPth";
 import Cookies from "js-cookie"; 
 const API = axios.create({
   // baseURL: 'http://localhost:3000/',
@@ -51,5 +51,9 @@ export const Create_Banners_Api = async (formData) =>
       withCredentials: true,
     }
   );
+
   export const Fetch_Banners_Api = async () =>
     await API.get(`${BANNERS_FETCH}`, {}, { withCredentials: true });
+
+  export const Delete_Single_Banner_Api = async (data) =>
+    await API.delete(`${BANNERS_DELETE}`, data, { withCredentials: true });

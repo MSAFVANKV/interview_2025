@@ -79,6 +79,37 @@ export const createBanner = asyncHandler(async (req, res) => {
   }
 });
 
+// ==== delete banner =============================
+export const deleteBanner = asyncHandler(async (req, res) => {
+    const { imageUrl } = req.body; // The image URL is sent in the request body
+  
+    try {
+      // Find the banner document
+      const banner = await Banner.findOne();
+  
+      if (!banner) {
+        return res.status(404).json({ message: "Banner not found" });
+      }
+  
+      // Find the index of the image to be deleted
+      const imageIndex = banner.banner.findIndex(img => img === imageUrl);
+      if (imageIndex === -1) {
+        return res.status(404).json({ message: "Image not found in the banner list" });
+      }
+  
+      // Remove the image from the banner array
+      banner.banner.splice(imageIndex, 1);
+  
+      // Save the updated banner
+      await banner.save();
+  
+      res.status(200).json({ message: "Banner image deleted successfully", banner });
+    } catch (error) {
+      console.error(error);
+      res.status(500).json({ message: "Server error", error });
+    }
+  });
+
 // Get Banners
 export const getBanners = asyncHandler(async (req, res) => {
   
