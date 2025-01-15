@@ -46,7 +46,7 @@ export const loginUser = asyncHandler(async (req, res) => {
         domain: ".cybpress-frontent.onrender.com", // Match backend domain
       });
 
-      res.setHeader("Authorization", `Bearer ${token}`);
+      // res.setHeader("Authorization", `Bearer ${token}`);
 
       return res.status(201).json({
         success: true,
@@ -76,7 +76,7 @@ export const loginUser = asyncHandler(async (req, res) => {
         domain: ".cybpress-frontent.onrender.com", // Match backend domain
       });
 
-      res.setHeader("Authorization", `Bearer ${token}`);
+      // res.setHeader("Authorization", `Bearer ${token}`);
 
       return res.status(200).json({
         success: true,
